@@ -4,20 +4,25 @@ It is a project for ecomerece fashion web app for Web Programming Assignment at 
 
 # How to clone code to github:
 
-git clone https://github.com/anduckhmt146/Shopify.git
+* git clone https://github.com/anduckhmt146/Shopify.git
 
 # How to push code to github:
 
-git branch -b <your_branch> (eg. git branch -b login)
-git init 
-git add .
-git commmit -m "your commit" (eg. git commit -m "update login screen")
-git remote add origin https://github.com/anduckhmt146/Shopify.git
-git push -u origin <your_branch>
+* git branch -b <your_branch> (eg. git branch -b login)
+
+* git init 
+
+* git add .
+
+* git commmit -m "your commit" (eg. git commit -m "update login screen")
+
+* git remote add origin https://github.com/anduckhmt146/Shopify.git
+
+* git push -u origin <your_branch>
 
 # How to pull code from github:
 
-git pull origin <your_branch>
+* git pull origin <your_branch>
 
 # Notice
 
