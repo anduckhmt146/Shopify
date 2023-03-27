@@ -8,9 +8,9 @@ It is a project for ecomerece fashion web app for Web Programming Assignment at 
 
 # How to push code to github:
 
-* git branch -b <your_branch> (eg. git branch -b login)
+* git init
 
-* git init 
+* git branch -b <your_branch> (eg. git branch -b login)
 
 * git add .
 
