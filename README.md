@@ -14,7 +14,7 @@ It is a project for ecomerece fashion web app for Web Programming Assignment at 
 
 * git add .
 
-* git commmit -m "your commit" (eg. git commit -m "update login screen")
+* git commit -m "your commit" (eg. git commit -m "update login screen")
 
 * git remote add origin https://github.com/anduckhmt146/Shopify.git
 
