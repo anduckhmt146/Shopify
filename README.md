@@ -6,7 +6,7 @@ It is a project for ecomerece fashion web app for Web Programming Assignment at 
 
 * git clone https://github.com/anduckhmt146/Shopify.git
 
-# How to push code to github:
+# How to push code from github:
 
 * git branch -b <your_branch> (eg. git branch -b login)
 
