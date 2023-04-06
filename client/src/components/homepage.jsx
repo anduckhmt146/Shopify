@@ -11,12 +11,12 @@ import {
   Button,
 } from "@mui/material";
 
-export const  Homepage = () => {
+export const Homepage = () => {
   const RenderBestSeller =()=>{
     let list = [];
     for(let i = 0; i < 5; i++) {
       list.push(
-        <Card elevation={0} sx={{ width: '280px', height: '350px' }}>
+        <Card elevation={0} sx={{ width: '280px', height: '350px' }} key={i}>
           <Box sx={{ position: 'absolute', ml: 0.5, mt: 0.5 }}>
             <Typography sx={{ color: '#fff', backgroundColor: '#000', mb: 1, textAlign: 'center', fontSize: 15, px: 1 }}>New</Typography>
             <Typography sx={{ backgroundColor: '#f33e5d', color: '#fff', textAlign: 'center', fontSize: 15 }}>-20%</Typography>
@@ -32,7 +32,7 @@ export const  Homepage = () => {
               Luiz Vitton Lace Suit
             </Typography>
             <Stack direction='row' display="flex" justifyContent="space-between">
-              <Typography variant='h6' var component='div' sx={{ fontSize: 18, fontWeight: '600' }}>
+              <Typography variant='h6' component='div' sx={{ fontSize: 18, fontWeight: '600' }}>
                 $180.00
               </Typography>
               <Typography 
@@ -63,7 +63,7 @@ export const  Homepage = () => {
     let list = [];
     for(let i = 0; i < 8; i++) {
       list.push(
-        <Grid item xs={3}>
+        <Grid item xs={3} key={i}>
           <Card elevation={0}>
             <CardMedia 
               component='img' 
@@ -93,6 +93,7 @@ export const  Homepage = () => {
         <Button 
           variant="contained" 
           disableElevation
+          key={i}
           sx={{ 
             background: "inherit", 
             color: '#000',
