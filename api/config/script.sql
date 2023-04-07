@@ -46,6 +46,7 @@ CREATE TABLE PRODUCT(
 CREATE TABLE CUSTOMER(
 	CustomerID INT AUTO_INCREMENT PRIMARY KEY,
     Phone_Number VARCHAR(10),
+    USERNAME VARCHAR(20) UNIQUE,
     PASSWORD VARCHAR(20),
     NAME VARCHAR(20),
     BIRTHDAY DATE,
@@ -66,8 +67,6 @@ CREATE TABLE ORDERS(
     CHECK (TOTAL_COST>0),
 	FOREIGN KEY (CustomerID) REFERENCES CUSTOMER(CustomerID)
 );
-
-
 
 
 CREATE TABLE IN_COLLECTION(
@@ -127,17 +126,32 @@ INSERT INTO `ltw`.`categories` (`NAME`, `GENDER`) VALUES ('Áo Sơ Mi Họa Ti�
 INSERT INTO `ltw`.`categories` (`NAME`, `GENDER`) VALUES ('Áo Sơ Mi Kiểu', '1');
 
 -- customer
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0794763040', '123456', 'Dương Huỳnh Anh Đức', '2002-02-01', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'admin');
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0903228745', '123456', 'Ngụy Anh Lạc', '2001-03-05', 'https://th.bing.com/th/id/R.0a8dfabc06847d163f5d82b41c8a5553?rik=h1peRQORlGvAwQ&pid=ImgRaw&r=0', 'customer');
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0895234412', '123456', 'Ô Diệp Kỳ Anh', '2003-08-12', 'https://th.bing.com/th/id/R.7033c066472691e4a77fc2ff05888e9b?rik=lyYSkGd4O16kdA&pid=ImgRaw&r=0', 'admin');
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0453897620', '123456', 'Ô Nhã Thành Bích', '2004-01-14', 'https://th.bing.com/th/id/R.1e2a1d5bd9cb34a519751d0193410524?rik=5bAUzJJmydpTyw&pid=ImgRaw&r=0', 'customer');
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0978564731', '123456', 'Lưu Thanh Anh', '1999-07-12', 'https://th.bing.com/th/id/OIP.meLqBXY9bIKdBi8-vuh5EAHaJ5?pid=ImgDet&w=576&h=770&rs=1', 'customer');
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0654893018', '123456', 'Hứa Khải', '1997-09-16', 'https://th.bing.com/th/id/R.5e01d11c56c5e3ccca69b807f00928a5?rik=aqhfhXNospFRfA&pid=ImgRaw&r=0', 'customer');
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0786543781', '123456', 'Trần Quốc Anh', '1995-12-03', 'https://img3.thuthuatphanmem.vn/uploads/2019/07/05/hinh-anh-con-gai-cat-toc-ngan-dep_082838188.jpg', 'customer');
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0123987591', '123456', 'Kim Siêu Quần', '1988-03-04', 'https://th.bing.com/th/id/OIP.uYqpZo0HcDu0Ky0YL9jU-wHaLH?pid=ImgDet&w=540&h=810&rs=1', 'customer');
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0967345192', '123456', 'Hà Gia Kính', '1989-05-06', 'https://1.bp.blogspot.com/-nrYtNPt3VFQ/X2bKuRwHGLI/AAAAAAAACQw/Z6SIXczOEA0CbmG_i8JpsIKqYAMSqRoeQCLcBGAsYHQ/s750/13.jpg', 'customer');
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0765947867', '123456', 'Phạm Hồng Hiên', '1990-09-08', 'https://th.bing.com/th/id/OIP.gu5TDePDIlQVfpZxyvP7FAHaEc?pid=ImgDet&rs=1', 'customer');
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0674679310', '123456', 'Xa Thi Mạn', '1989-10-11', 'https://th.bing.com/th/id/OIP.R806Nu3w4G_GzlXPu4FqqQHaK8?pid=ImgDet&w=502&h=742&rs=1', 'admin');
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0852531027', 'ducan1406', '123456', 'Nguyễn Đức An', '2002-06-14', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'admin');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0812586985', 'datdat123', '123456', 'Lê Phước Đạt', '2002-05-20', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'customer');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0794763040', 'ducduong123', '123456', 'Dương Huỳnh Anh Đức', '2002-02-01', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'admin');
+
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0903228745', 'lac123', '123456', 'Ngụy Anh Lạc', '2001-03-05', 'https://th.bing.com/th/id/R.0a8dfabc06847d163f5d82b41c8a5553?rik=h1peRQORlGvAwQ&pid=ImgRaw&r=0', 'customer');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0895234412', 'anh123', '123456', 'Ô Diệp Kỳ Anh', '2003-08-12', 'https://th.bing.com/th/id/R.7033c066472691e4a77fc2ff05888e9b?rik=lyYSkGd4O16kdA&pid=ImgRaw&r=0', 'admin');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0453897620', 'bich123', '123456', 'Ô Nhã Thành Bích', '2004-01-14', 'https://th.bing.com/th/id/R.1e2a1d5bd9cb34a519751d0193410524?rik=5bAUzJJmydpTyw&pid=ImgRaw&r=0', 'customer');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0978564731', 'anh456', '123456', 'Lưu Thanh Anh', '1999-07-12', 'https://th.bing.com/th/id/OIP.meLqBXY9bIKdBi8-vuh5EAHaJ5?pid=ImgDet&w=576&h=770&rs=1', 'customer');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0654893018', 'khai123', '123456', 'Hứa Khải', '1997-09-16', 'https://th.bing.com/th/id/R.5e01d11c56c5e3ccca69b807f00928a5?rik=aqhfhXNospFRfA&pid=ImgRaw&r=0', 'customer');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0786543781', 'anh789', '123456', 'Trần Quốc Anh', '1995-12-03', 'https://img3.thuthuatphanmem.vn/uploads/2019/07/05/hinh-anh-con-gai-cat-toc-ngan-dep_082838188.jpg', 'customer');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0123987591', '123456', 'quan123', 'Kim Siêu Quần', '1988-03-04', 'https://th.bing.com/th/id/OIP.uYqpZo0HcDu0Ky0YL9jU-wHaLH?pid=ImgDet&w=540&h=810&rs=1', 'customer');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0967345192', 'kinh123', '123456', 'Hà Gia Kính', '1989-05-06', 'https://1.bp.blogspot.com/-nrYtNPt3VFQ/X2bKuRwHGLI/AAAAAAAACQw/Z6SIXczOEA0CbmG_i8JpsIKqYAMSqRoeQCLcBGAsYHQ/s750/13.jpg', 'customer');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0765947867', 'hien123', '123456', 'Phạm Hồng Hiên', '1990-09-08', 'https://th.bing.com/th/id/OIP.gu5TDePDIlQVfpZxyvP7FAHaEc?pid=ImgDet&rs=1', 'customer');
+
+INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0674679310', 'man123','123456', 'Xa Thi Mạn', '1989-10-11', 'https://th.bing.com/th/id/OIP.R806Nu3w4G_GzlXPu4FqqQHaK8?pid=ImgDet&w=502&h=742&rs=1', 'admin');
 
 -- Product
 INSERT INTO `ltw`.`product` (`CODE`, `NAME`, `COLOR`, `SIZE`, `MATERIAL`, `DESCRIPTION`, `QUANITY`, `SALEOFF`, `PRICE`, `IMG1`, `IMG2`, `IMG3`, `IMG4`, `CATEGORY_ID`) VALUES ('DC09071', 'Đầm nhún eo cổ nơ', 'Đen-Hồng', 'XS', 'VOAN PHỐI COTTON', 'Váy liền giữa áo sơ mi và chân váy mang lại vẻ sang trọng, tiện lợi', '200', '0.5', '530000', 'https://js0fpsb45jobj.vcdn.cloud/storage/upload/media/gumac/DC09071/2-HONG-DC09071.jpg', 'https://js0fpsb45jobj.vcdn.cloud/storage/upload/media/gumac/DC09071/3-HONG-DC09071.jpg', 'https://js0fpsb45jobj.vcdn.cloud/storage/upload/media/gumac/DC09071/4-HONG-DC09071.jpg', 'https://js0fpsb45jobj.vcdn.cloud/storage/upload/media/gumac/DC09071/5-HONG-DC09071.jpg', '1');
