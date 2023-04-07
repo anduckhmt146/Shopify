@@ -24,7 +24,7 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
 
   return (
     <React.Fragment>
-      <AppBar sx={{ background: '#fff', pt: 2 }}>
+      <AppBar position="fixed" sx={{ background: '#fff', pt: 2 }}>
         <Toolbar>
           <Typography
             variant="h6"

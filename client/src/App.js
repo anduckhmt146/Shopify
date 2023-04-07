@@ -6,6 +6,7 @@ import { Header } from './components/Header';
 import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { ErrorPage } from './pages/ErrorPage';
+import { Product } from './pages/ProductPage';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/product" element={<Product />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

@@ -6,7 +6,6 @@ import {
   Stack,
   Typography,
   TextField,
-  Grid,
   Button,
   InputAdornment,
   FormControlLabel,
@@ -30,7 +29,7 @@ export const LoginPage = ({ setLoggedIn }) => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        mt={15}
+        mt={20}
         mb={5}>
         <Box direction="column">
           <Typography
@@ -52,7 +51,7 @@ export const LoginPage = ({ setLoggedIn }) => {
               Create an account
             </Typography>
           </Typography>
-          <Stack sx={{ width: '500px', boxShadow: 3, p: 5, mt: 3 }}>
+          <Stack sx={{ width: '500px', boxShadow: 3, p: 5, my: 3 }}>
             <TextField
               placeholder="Your username or email"
               sx={{ backgroundColor: '#f7f8fa' }}

@@ -16,7 +16,7 @@ export const HomePage = () => {
     let list = [];
     for (let i = 0; i < 5; i++) {
       list.push(
-        <Card elevation={0} sx={{ width: '280px', height: '350px' }} key={i}>
+        <Card elevation={0} sx={{ width: '280px', height: '350px', mt: 2 }} key={i}>
           <Box sx={{ position: 'absolute', ml: 0.5, mt: 0.5 }}>
             <Typography
               sx={{
@@ -164,14 +164,14 @@ export const HomePage = () => {
             variant="h6"
             component="div"
             sx={{ fontSize: 40, fontWeight: 700 }}>
-            Best Sellers
+              Best Sellers
           </Typography>
           <Stack
             direction="row"
             sx={{
               width: '100%',
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
               alignItems: 'center',
               flexWrap: 'wrap',
             }}>
@@ -226,7 +226,7 @@ export const HomePage = () => {
             sx={{
               width: '100%',
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
               alignItems: 'center',
               flexWrap: 'wrap',
             }}>
