@@ -39,7 +39,7 @@ const marks = [
   },
 ];
 
-export const Product = () => {
+export const ProductPage = () => {
   const [price, setPrice] = useState(300);
   const [size, setSize] = useState("S");
 

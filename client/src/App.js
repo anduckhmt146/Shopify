@@ -6,7 +6,8 @@ import { Header } from './components/Header';
 import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { ErrorPage } from './pages/ErrorPage';
-import { Product } from './pages/ProductPage';
+import { SignupPage } from './pages/SignupPage';
+import { ProductPage } from './pages/ProductPage';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -16,8 +17,9 @@ function App() {
       <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/product" element={<ProductPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

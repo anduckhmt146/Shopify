@@ -11,11 +11,12 @@ import {
   FormControlLabel,
   Checkbox,
   IconButton,
+  Link
 } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-export const LoginPage = ({ setLoggedIn }) => {
+export const SignupPage = () => {
   const navigate = useNavigate();
   const [invisible, setInvisible] = useState(true);
   const [pass, setPass] = useState('');
@@ -23,8 +24,8 @@ export const LoginPage = ({ setLoggedIn }) => {
     setInvisible(!invisible);
   };
 
-  function redirectSignup() {
-    navigate("../signup");
+  function returnLogin() {
+    navigate("../login");
   }
 
   return (
@@ -41,26 +42,51 @@ export const LoginPage = ({ setLoggedIn }) => {
             variant="h6"
             component="div"
             sx={{ fontSize: 30, fontWeight: 700, textAlign: 'center' }}>
-            Log In
+              Create your Account
           </Typography>
           <Typography
             gutterBottom
             variant="h6"
             component="div"
             sx={{ fontSize: 20, textAlign: 'center' }}>
-            Don't have an account yet?
+              Already have an account?
             <Typography
               component="span"
               sx={{ fontSize: 20, fontWeight: 700, pl: 1, cursor: 'pointer' }}
-              onClick={redirectSignup}>
-                Create an account
+              onClick={returnLogin}>
+                Log in
             </Typography>
           </Typography>
           <Stack sx={{ width: '500px', boxShadow: 3, p: 5, my: 3 }}>
             <TextField
-              placeholder="Your username or email"
+              placeholder="Your Name"
               sx={{ 
-                backgroundColor: '#f7f8fa',
+                backgroundColor: '#f7f8fa', 
+                mt: 3, 
+                "& .MuiOutlinedInput-root": {
+                  "& > fieldset": {
+                    border: "none"
+                  }
+                }
+              }}
+            />
+            <TextField
+              placeholder="Username"
+              sx={{ 
+                backgroundColor: '#f7f8fa', 
+                mt: 3,
+                "& .MuiOutlinedInput-root": {
+                  "& > fieldset": {
+                    border: "none"
+                  }
+                }
+              }}
+            />
+            <TextField
+              placeholder="Your Email"
+              sx={{ 
+                backgroundColor: '#f7f8fa', 
+                mt: 3,
                 "& .MuiOutlinedInput-root": {
                   "& > fieldset": {
                     border: "none"
@@ -98,34 +124,27 @@ export const LoginPage = ({ setLoggedIn }) => {
                 ),
               }}
             />
-            <FormControlLabel
-              label="Stay Signed In"
-              control={<Checkbox />}
-              sx={{ mt: 2, fontSize: 20 }}
-            />
             <Button
               variant="contained"
               disableElevation
               sx={{ color: '#fff', backgroundColor: '#000', mt: 2, p: 2 }}
               onClick={() => {
-                setLoggedIn(true);
-                navigate('../');
+                navigate('../login');
               }}>
-              Log In
+                Create Account
             </Button>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              sx={{
-                fontSize: 20,
-                fontWeight: 700,
-                textAlign: 'left',
-                mt: 3,
-                cursor: 'pointer',
-              }}>
-              Forgot your password?
-            </Typography>
+            <FormControlLabel
+              label={
+                <div>
+                  <span>Yes, I agree with </span>
+                  <Link to={'/terms'} sx={{ fontWeight: 700, textDecoration: 'none', color: '#000' }}>Privacy Policy</Link>
+                  <span> and </span>
+                  <Link to={'/privacy'} sx={{ fontWeight: 700, textDecoration: 'none', color: '#000' }}>Terms of Use</Link>
+                </div>
+              }
+              control={<Checkbox />}
+              sx={{ mt: 2, fontSize: 20 }}
+            />
           </Stack>
         </Box>
       </Box>

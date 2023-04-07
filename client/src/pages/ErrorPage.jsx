@@ -5,7 +5,7 @@ import { Box, Typography, Grid, Button, Container } from '@mui/material';
 export const ErrorPage = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate('../homepage');
+    navigate('../');
   };
 
   return (
@@ -38,7 +38,7 @@ export const ErrorPage = () => {
                   mt: 4,
                 }}
                 onClick={() => handleBack()}>
-                Back to Homepage
+                  Back to Homepage
               </Button>
             </Grid>
             <Grid item xs={6}>

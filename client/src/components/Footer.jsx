@@ -153,7 +153,7 @@ export const Footer = () => {
                 <Typography
                   variant="h6"
                   sx={{ color: '#000', fontWeight: 600, fontSize: 24, mb: 3 }}>
-                  Newsletter
+                    Newsletter
                 </Typography>
                 <Typography variant="h6" sx={{ color: '#5e6470', mb: 2 }}>
                   Subcribe to our weekly Newsletter and receive updates via
@@ -163,7 +163,14 @@ export const Footer = () => {
                   <TextField
                     id="standard-name"
                     placeholder="Your email..."
-                    sx={{ backgroundColor: '#f7f8fa' }}
+                    sx={{ 
+                      backgroundColor: '#f7f8fa',
+                      "& .MuiOutlinedInput-root": {
+                        "& > fieldset": {
+                          border: "none"
+                        }
+                      }
+                    }}
                   />
                   <Button
                     variant="contained"
@@ -179,7 +186,7 @@ export const Footer = () => {
                 <Typography
                   variant="h6"
                   sx={{ color: '#000', fontWeight: 600, fontSize: 24, mt: 3 }}>
-                  We Accept
+                    We Accept
                 </Typography>
                 <Stack
                   display="flex"
@@ -229,7 +236,7 @@ export const Footer = () => {
           component="div"
           sx={{ color: '#5e6470', fontSize: 16 }}
           mt={10}>
-          &copy; 2022 - E-commerce by Kryptonyte
+            &copy; 2022 - E-commerce by Kryptonyte
         </Typography>
       </Box>
     </React.Fragment>

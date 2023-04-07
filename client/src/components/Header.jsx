@@ -57,6 +57,11 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
                 width: '50%',
                 backgroundColor: '#f6f6f6',
                 mr: 2,
+                "& .MuiOutlinedInput-root": {
+                  "& > fieldset": {
+                    border: "none"
+                  }
+                }
               }}
             />
           )}
