@@ -41,7 +41,7 @@ export const HomePage = () => {
           </Box>
           <CardMedia
             component="img"
-            image="https://source.unsplash.com/random"
+            image="https://picsum.photos/1900/800"
             alt="unsplash img"
             sx={{ width: '100%', height: '280px' }}
           />
@@ -93,7 +93,7 @@ export const HomePage = () => {
           <Card elevation={0}>
             <CardMedia
               component="img"
-              image="https://source.unsplash.com/random"
+              image="https://picsum.photos/1900/800"
               alt="unsplash img"
               sx={{
                 height: '20vh',
@@ -144,7 +144,7 @@ export const HomePage = () => {
           <Card elevation={0}>
             <CardMedia
               component="img"
-              image="https://source.unsplash.com/random"
+              image="https://picsum.photos/1900/800"
               alt="unsplash img"
               sx={{
                 height: '70vh',
@@ -189,7 +189,7 @@ export const HomePage = () => {
           <Card elevation={0} sx={{ width: '49%' }}>
             <CardMedia
               component="img"
-              image="https://source.unsplash.com/random"
+              image="https://picsum.photos/1900/800"
               alt="unsplash img"
               sx={{
                 height: '40vh',
@@ -199,7 +199,7 @@ export const HomePage = () => {
           <Card elevation={0} sx={{ width: '49%' }}>
             <CardMedia
               component="img"
-              image="https://source.unsplash.com/random"
+              image="https://picsum.photos/1900/800"
               alt="unsplash img"
               sx={{
                 height: '40vh',
@@ -256,7 +256,7 @@ export const HomePage = () => {
         <Card elevation={0}>
           <CardMedia
             component="img"
-            image="https://source.unsplash.com/random"
+            image="https://picsum.photos/1900/800"
             alt="unsplash img"
             sx={{
               height: '100vh',

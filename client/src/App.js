@@ -7,21 +7,26 @@ import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { ErrorPage } from './pages/ErrorPage';
 import { Product } from './pages/ProductPage';
+import { ProductDetail } from './pages/ProductDetailPage';
+import { StyledEngineProvider } from '@mui/material/styles';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
 
   return (
-    <Box>
-      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-      <Footer />
-    </Box>
+    <StyledEngineProvider injectFirst>
+      <Box>
+        <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/product-detail" element={<ProductDetail />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        <Footer />
+      </Box>
+    </StyledEngineProvider>
   );
 }
 

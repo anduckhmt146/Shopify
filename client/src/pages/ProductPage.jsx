@@ -84,7 +84,7 @@ export const Product = () => {
           </Box>
           <CardMedia 
             component='img' 
-            image='https://source.unsplash.com/random' 
+            image='https://picsum.photos/1900/800' 
             alt='unsplash img'
             sx={{ width: '100%', height: '280px' }}
           />
