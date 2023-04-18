@@ -10,32 +10,23 @@ import {
   Grid,
   Button,
 } from '@mui/material';
+import './../styles/HomePage.css';
 
 export const HomePage = () => {
   const RenderBestSeller = () => {
     let list = [];
     for (let i = 0; i < 5; i++) {
       list.push(
-        <Card elevation={0} sx={{ width: '280px', height: '350px', mt: 2 }} key={i}>
-          <Box sx={{ position: 'absolute', ml: 0.5, mt: 0.5 }}>
-            <Typography
-              sx={{
-                color: '#fff',
-                backgroundColor: '#000',
-                mb: 1,
-                textAlign: 'center',
-                fontSize: 15,
-                px: 1,
-              }}>
+        <Card 
+          className="homepage_item" 
+          elevation={0} 
+          key={i}
+        >
+          <Box>
+            <Typography>
               New
             </Typography>
-            <Typography
-              sx={{
-                backgroundColor: '#f33e5d',
-                color: '#fff',
-                textAlign: 'center',
-                fontSize: 15,
-              }}>
+            <Typography>
               -20%
             </Typography>
           </Box>
@@ -43,40 +34,28 @@ export const HomePage = () => {
             component="img"
             image="https://picsum.photos/1900/800"
             alt="unsplash img"
-            sx={{ width: '100%', height: '280px' }}
           />
-          <CardContent sx={{ pt: 0, pl: 0, pr: 0 }}>
+          <CardContent>
             <Typography
               variant="h6"
               component="div"
-              sx={{ pt: 1, fontWeight: '600', fontSize: 18 }}>
+            >
               Luiz Vitton Lace Suit
             </Typography>
-            <Stack
-              direction="row"
-              display="flex"
-              justifyContent="space-between">
+            <Stack>
               <Typography
                 variant="h6"
                 component="div"
-                sx={{ fontSize: 18, fontWeight: '600' }}>
+              >
                 $180.00
               </Typography>
               <Typography
                 variant="h6"
                 component="div"
-                sx={{
-                  textDecoration: 'line-through',
-                  color: '#f5647d',
-                  fontSize: 16,
-                  lineHeight: '1.8',
-                  verticalAlign: 'middle',
-                  pt: 0.1,
-                  ml: -4,
-                }}>
+              >
                 $210.90
               </Typography>
-              <Rating size="small" sx={{ pt: 0.5 }}></Rating>
+              <Rating size="small"></Rating>
             </Stack>
           </CardContent>
         </Card>
@@ -95,10 +74,6 @@ export const HomePage = () => {
               component="img"
               image="https://picsum.photos/1900/800"
               alt="unsplash img"
-              sx={{
-                height: '20vh',
-                border: '1px solid #f3f4f6',
-              }}
             />
           </Card>
         </Grid>
@@ -116,20 +91,11 @@ export const HomePage = () => {
       if (i === 3) text = 'Linkedln';
 
       list.push(
-        <Button
+        <Button className='media_btn'
           variant="contained"
           disableElevation
           key={i}
-          sx={{
-            background: 'inherit',
-            color: '#000',
-            fontWeight: 600,
-            fontSize: 30,
-            textTransform: 'none',
-            '&:hover': {
-              color: '#fff',
-            },
-          }}>
+        >
           {text}
         </Button>
       );
@@ -139,112 +105,70 @@ export const HomePage = () => {
 
   return (
     <React.Fragment>
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <Box sx={{ width: '80%', mt: 22 }}>
+      <Box className="homepage_main-img">
+        <Box>
           <Card elevation={0}>
             <CardMedia
               component="img"
               image="https://picsum.photos/1900/800"
               alt="unsplash img"
-              sx={{
-                height: '70vh',
-              }}
             />
           </Card>
         </Box>
       </Box>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ mt: 15 }}>
-        <Box sx={{ width: '80%' }}>
+      <Box className="homepage_best-seller">
+        <Box className="homepage_best-seller_ctn">
           <Typography
             gutterBottom
             variant="h6"
             component="div"
-            sx={{ fontSize: 40, fontWeight: 700 }}>
-              Best Sellers
+          >
+            Best Sellers
           </Typography>
-          <Stack
-            direction="row"
-            sx={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-            }}>
+          <Stack>
             <RenderBestSeller />
           </Stack>
         </Box>
       </Box>
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <Box
-          direction="row"
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ width: '80%', mt: 10 }}>
-          <Card elevation={0} sx={{ width: '49%' }}>
+      <Box className="homepage_middle-img">
+        <Box>
+          <Card elevation={0}>
             <CardMedia
               component="img"
               image="https://picsum.photos/1900/800"
               alt="unsplash img"
-              sx={{
-                height: '40vh',
-              }}
             />
           </Card>
-          <Card elevation={0} sx={{ width: '49%' }}>
+          <Card elevation={0}>
             <CardMedia
               component="img"
               image="https://picsum.photos/1900/800"
               alt="unsplash img"
-              sx={{
-                height: '40vh',
-              }}
             />
           </Card>
         </Box>
       </Box>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ mt: 15 }}>
-        <Box sx={{ width: '80%' }}>
+      <Box className="homepage_newly-added">
+        <Box className="homepage_newly-added_ctn">
           <Typography
             gutterBottom
             variant="h6"
             component="div"
-            sx={{ fontSize: 40, fontWeight: 700 }}>
+          >
             Newly Added
           </Typography>
-          <Stack
-            direction="row"
-            sx={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-            }}>
+          <Stack>
             <RenderBestSeller />
           </Stack>
         </Box>
       </Box>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ mt: 15 }}>
-        <Box sx={{ width: '80%' }}>
+      <Box className="homepage_explore">
+        <Box className="homepage_explore_ctn">
           <Typography
             gutterBottom
             variant="h6"
             component="div"
-            sx={{ fontSize: 40, fontWeight: 700 }}>
+          >
             Explore Our Brand
           </Typography>
           <Grid container spacing={2}>
@@ -252,26 +176,16 @@ export const HomePage = () => {
           </Grid>
         </Box>
       </Box>
-      <Box sx={{ width: '100%', mt: 10 }}>
+      <Box className="homepage_banner">
         <Card elevation={0}>
           <CardMedia
             component="img"
             image="https://picsum.photos/1900/800"
             alt="unsplash img"
-            sx={{
-              height: '100vh',
-              border: '1px solid #f3f4f6',
-            }}
           />
         </Card>
       </Box>
-      <Box
-        mt={10}
-        mb={10}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column">
+      <Box className="homepage_follow">
         <Typography mb={2}>Follow Us</Typography>
         <Stack direction="row">
           <RenderFollowBtn />

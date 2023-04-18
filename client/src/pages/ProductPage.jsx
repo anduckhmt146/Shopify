@@ -27,6 +27,7 @@ import {
   Pagination
 } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import './../styles/ProductPage.css';
 
 const marks = [
   {
@@ -77,41 +78,41 @@ export const Product = () => {
     let list = [];
     for(let i = 0; i < 20; i++) {
       list.push(
-        <Card elevation={0} sx={{ width: '280px', height: '350px', mt: 2 }} key={i}>
-          <Box sx={{ position: 'absolute', ml: 0.5, mt: 0.5 }}>
-            <Typography sx={{ color: '#fff', backgroundColor: '#000', mb: 1, textAlign: 'center', fontSize: 15, px: 1 }}>New</Typography>
-            <Typography sx={{ backgroundColor: '#f33e5d', color: '#fff', textAlign: 'center', fontSize: 15 }}>-20%</Typography>
+        <Card 
+          className="product_item" 
+          elevation={0} 
+          key={i}
+        >
+          <Box>
+            <Typography>New</Typography>
+            <Typography>-20%</Typography>
           </Box>
           <CardMedia 
             component='img' 
             image='https://picsum.photos/1900/800' 
             alt='unsplash img'
-            sx={{ width: '100%', height: '280px' }}
           />
-          <CardContent sx={{ pt: 0, pl: 0, pr: 0 }}>
-            <Typography variant='h6' component='div' sx={{ pt: 1, fontWeight: '600', fontSize: 18 }}>
+          <CardContent>
+            <Typography 
+              variant='h6' 
+              component='div'
+            >
               Luiz Vitton Lace Suit
             </Typography>
-            <Stack direction='row' display="flex" justifyContent="space-between">
-              <Typography variant='h6' component='div' sx={{ fontSize: 18, fontWeight: '600' }}>
+            <Stack>
+              <Typography 
+                variant='h6' 
+                component='div'
+              >
                 $180.00
               </Typography>
               <Typography 
                 variant='h6' 
                 component='div' 
-                sx={{ 
-                  textDecoration: 'line-through', 
-                  color: '#f5647d', 
-                  fontSize: 16, 
-                  lineHeight: '1.8',
-                  verticalAlign: 'middle', 
-                  pt: 0.1,
-                  ml: -4 
-                }}
               >
                 $210.90
               </Typography>
-              <Rating size='small' sx={{ pt: 0.5 }}></Rating>
+              <Rating size='small'></Rating>
             </Stack>
           </CardContent>
         </Card>
@@ -122,39 +123,33 @@ export const Product = () => {
 
   return (
     <React.Fragment>
-      <Box 
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Box sx={{ width: '80%', mt: 20, mb: 5 }}>
-          <Stack sx={{ py: 4 }}>
-            <Breadcrumbs aria-label='breadcrumbs' separator='>'>
-              <Link href="#" sx={{ color: '#aaaab2', textDecoration: 'none' }}>Home</Link>
-              <Link href="#" sx={{ color: '#aaaab2', textDecoration: 'none' }}>Shop All</Link>
-              <Link href="#" sx={{ color: '#aaaab2', textDecoration: 'none' }}>Shop All</Link>
+      <Box className="product_container">
+        <Box className="product_wrapper">
+          <Stack className="product_breadcrumbs">
+            <Breadcrumbs 
+              aria-label='breadcrumbs' 
+              separator='>'
+            >
+              <Link href="#">Home</Link>
+              <Link href="#">Shop All</Link>
+              <Link href="#">Shop All</Link>
             </Breadcrumbs>
           </Stack>
-          <Box sx={{ display: 'flex' }}>
-            <Stack sx={{width: '300px', flexShrink: 0 }}>
+          <Box className="product_content">
+            <Stack className="product_sidebar">
               <Accordion 
                 elevation={0}
                 defaultExpanded={true}
-                sx={{
-                  "&.MuiAccordion-root:before": {
-                    height: 0
-                }}}
               >
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ p: 0 }}>
-                  <Typography sx={{ fontSize: 20, fontWeight: 700 }}>Categories</Typography>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>Categories</Typography>
                 </AccordionSummary>
-                <AccordionDetails sx={{ p: 0 }}>
+                <AccordionDetails>
                   {['Tops(64)', 'Dresses(54)', 'T-shirts(29)', 'Jeans(18)'].map((text, index) => (
                     <FormControlLabel 
                       key={text}
                       label={text}
                       control={<Checkbox />}
-                      sx={{ fontSize: 20, display: 'block' }}
                     />
                   ))}
                 </AccordionDetails>
@@ -163,21 +158,16 @@ export const Product = () => {
               <Accordion 
                 elevation={0}
                 defaultExpanded={true}
-                sx={{
-                  "&.MuiAccordion-root:before": {
-                    height: 0
-                }}}
               >
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ p: 0 }}>
-                  <Typography sx={{ fontSize: 20, fontWeight: 700 }}>Brand</Typography>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>Brand</Typography>
                 </AccordionSummary>
-                <AccordionDetails sx={{ p: 0 }}>
+                <AccordionDetails>
                   {['URBANIC', 'BoStreet', 'Tokyo', 'Vero', 'H&M'].map((text) => (
                     <FormControlLabel 
                       key={text}
                       label={text}
                       control={<Checkbox />}
-                      sx={{ fontSize: 20, display: 'block' }}
                     />
                   ))}                
                 </AccordionDetails>
@@ -186,15 +176,11 @@ export const Product = () => {
               <Accordion 
                 elevation={0}
                 defaultExpanded={true}
-                sx={{
-                  "&.MuiAccordion-root:before": {
-                    height: 0
-                }}}
               >
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ p: 0 }}>
-                  <Typography sx={{ fontSize: 20, fontWeight: 700 }}>Size</Typography>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>Size</Typography>
                 </AccordionSummary>
-                <AccordionDetails sx={{ p: 0 }}>
+                <AccordionDetails>
                   <ToggleButtonGroup
                     value={size}
                     exclusive
@@ -206,13 +192,6 @@ export const Product = () => {
                         value={text} 
                         aria-label={text} 
                         disableRipple
-                        sx={{
-                          fontWeight: 700,
-                          border: "1px solid #a8abb2",
-                          borderRadius: 0,
-                          py: '10px',
-                          px: '15px'
-                        }}
                       >
                         {text}
                       </ToggleButton>
@@ -224,15 +203,11 @@ export const Product = () => {
               <Accordion 
                 elevation={0}
                 defaultExpanded={true}
-                sx={{
-                  "&.MuiAccordion-root:before": {
-                    height: 0
-                }}}
               >
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ p: 0 }}>
-                  <Typography sx={{ fontSize: 20, fontWeight: 700 }}>Color</Typography>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>Color</Typography>
                 </AccordionSummary>
-                <AccordionDetails sx={{ p: 0 }}>
+                <AccordionDetails>
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="Blue"
@@ -257,16 +232,12 @@ export const Product = () => {
               <Accordion 
                 elevation={0}
                 defaultExpanded={true}
-                sx={{
-                  "&.MuiAccordion-root:before": {
-                    height: 0
-                }}}
               >
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ p: 0 }}>
-                  <Typography sx={{ fontSize: 20, fontWeight: 700 }}>Price</Typography>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>Price</Typography>
                 </AccordionSummary>
-                <AccordionDetails sx={{ p: 0 }}>
-                  <Typography sx={{ fontSize: 20, fontWeight: 700, textAlign: 'center', mb: 1 }}>$5 - ${price}</Typography>
+                <AccordionDetails>
+                  <Typography>$5 - ${price}</Typography>
                   <Slider
                     aria-label="Always visible"
                     step={1}
@@ -274,15 +245,17 @@ export const Product = () => {
                     valueLabelDisplay="on"
                     defaultValue={75}
                     disableSwap                    
-                    sx={{ color: "#0f172a", "& .MuiSlider-valueLabel": { display: 'none'} }}
                     onChange={(e) => handlePrice(e.target.value)}
                   />                
                 </AccordionDetails>
               </Accordion>
             </Stack>
-            <Box component="main" sx={{ flexGrow: 1, px: 4, py: 2 }}>
-              <Stack display="flex" justifyContent="space-between" alignItems="center" direction='row' mr={1}>
-                <Typography sx={{ fontWeight: 600 }}>Showing 1-16 of 96 products</Typography>
+            <Box 
+              className="product_display" 
+              component="main"
+            >
+              <Stack>
+                <Typography>Showing 1-16 of 96 products</Typography>
                 <Autocomplete
                   options={top100Films.map((option) => option.title)}
                   renderInput={(params) => 
@@ -291,13 +264,12 @@ export const Product = () => {
                       variant="outlined"
                       defaultValue={[top100Films[0]]}
                       placeholder="Sort options"
-                      sx={{ pl: 1, fontWeight: 700 }} 
                       InputProps={{
                         ...params.InputProps,
                         startAdornment: (
                           <>
-                            <InputAdornment sx={{ pl: 1 }} position="start">
-                              <Typography sx={{ fontWeight: 700 }}>
+                            <InputAdornment position="start">
+                              <Typography>
                                 Sort by:
                               </Typography>
                             </InputAdornment>
@@ -307,25 +279,12 @@ export const Product = () => {
                       }}
                     />
                   }
-                  sx={{ width: '350px' }}
                 />
               </Stack>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                flexWrap='wrap'
-                mt={2}
-              >
+              <Box>
                 <RenderProduct />
               </Box>
-              <Stack 
-                display="flex"
-                justifyContent="center"
-                alignItems="center" 
-                spacing={2}
-                p={4}
-              >
+              <Stack spacing={2}>
                 <Pagination count={10} shape="rounded" />
               </Stack>
             </Box>

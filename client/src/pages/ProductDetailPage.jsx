@@ -87,7 +87,7 @@ export const ProductDetail = () => {
           elevation={0} 
           key={i}
         >
-          <Box sx={{ position: 'absolute', ml: 0.5, mt: 0.5 }}>
+          <Box className="product-detail_img-detail">
             <Typography>
               New
             </Typography>
