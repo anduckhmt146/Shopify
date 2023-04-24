@@ -7,6 +7,7 @@ import { SignUpPage } from './pages/General/SignUpPage';
 import { ProductPage } from './pages/Customer/ProductPage';
 import { ProductDetailPage } from './pages/Customer/ProductDetailPage';
 import { OrderDetail } from './pages/Customer/OrderDetailPage';
+import { MyOrder } from './pages/Customer/MyOrderPage';
 import { ErrorPage } from './pages/General/ErrorPage';
 import { UserLayout } from './layout/UserLayout';
 import { AboutUs } from './pages/General/AboutUsPage';
@@ -31,6 +32,11 @@ function App() {
         <Route path="/" element={
           <UserLayout>
             <HomePage setLoggedIn={setLoggedIn} />
+          </UserLayout>
+        } />
+        <Route path="/order" element={
+          <UserLayout>
+            <MyOrder setLoggedIn={setLoggedIn} />
           </UserLayout>
         } />
         <Route path="/order/detail" element={
