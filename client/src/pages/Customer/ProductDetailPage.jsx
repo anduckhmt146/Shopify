@@ -429,4 +429,4 @@ export const ProductDetailPage = () => {
   );
 };
 
-const colors = ['#2434c7', '#000', '#f04439'];
+const colors = ['#2434c7', '#000', '#f04439', 'red'];

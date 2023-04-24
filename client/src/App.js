@@ -6,8 +6,10 @@ import { LoginPage } from './pages/General/LoginPage';
 import { SignUpPage } from './pages/General/SignUpPage';
 import { ProductPage } from './pages/Customer/ProductPage';
 import { ProductDetailPage } from './pages/Customer/ProductDetailPage';
+import { OrderDetail } from './pages/Customer/OrderDetailPage';
 import { ErrorPage } from './pages/General/ErrorPage';
 import { UserLayout } from './layout/UserLayout';
+import { AboutUs } from './pages/General/AboutUsPage';
 import Topbar from './components/topbar/Topbar';
 import Sidebar from './components/sidebar/Sidebar';
 import Home from './pages/Admin/home/Home';
@@ -31,7 +33,16 @@ function App() {
             <HomePage setLoggedIn={setLoggedIn} />
           </UserLayout>
         } />
-        
+        <Route path="/order/detail" element={
+          <UserLayout>
+            <OrderDetail setLoggedIn={setLoggedIn} />
+          </UserLayout>
+        } />
+        <Route path="/aboutUs" element={
+          <UserLayout>
+            <AboutUs setLoggedIn={setLoggedIn} />
+          </UserLayout>
+        } />
         <Route path="/home" element={
           <UserLayout>
             <HomePage setLoggedIn={setLoggedIn} />
