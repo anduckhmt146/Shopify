@@ -26,6 +26,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SearchIcon from '@mui/icons-material/Search';
 import './../styles/Header.css'
 import axios from 'axios';
 import { useTheme } from "@mui/material";
@@ -199,7 +200,7 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
     <React.Fragment>
       <AppBar sx={{ background: '#fff', pt: 2 }} className="header_ctn">
         <Toolbar sx={{ position: 'relative' }}>
-          <IconButton sx={{ position: 'absolute' }} onClick={() => setOpenDrawer(true)}>
+          <IconButton sx={{ position: 'absolute', top: '10px', left: '20px' }} onClick={() => setOpenDrawer(true)}>
             <MenuIcon sx={{fontSize: '30px'}} />
           </IconButton>
           <Typography
@@ -213,6 +214,7 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
               color: '#000',
               fontStyle: 'italic',
               fontWeight: 800,
+              minWidth: '200px'
             }}>
             SHOPIFY
           </Typography>
@@ -234,10 +236,21 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
                 backgroundColor: '#f6f6f6',
                 mr: 2,
               }}
+              className='header_search-field'
             />
           )}
           {loggedIn && (
-            <Stack direction="row" sx={{ mr: 10 }}>
+            <Stack className='header_user-icons' direction="row" sx={{ mr: 10 }}>
+              <IconButton 
+                className='header_search-btn header_user-btn' 
+                sx={{ 
+                  color: "#000", 
+                  pr: 3.5, 
+                  mt: 1.3 
+                }}
+              >
+                <SearchIcon />
+              </IconButton>
               <Button
                 variant="contained"
                 startIcon={
@@ -254,8 +267,10 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
                   '&:hover': {
                     color: '#fff',
                   },
-                }}>
-                {console.log(screen.width)}
+                }}
+                className="header_user-btn"
+              >
+                  <p className="header_user-txt">Đơn hàng</p>
               </Button>
               <Button
                 variant="contained"
@@ -269,11 +284,14 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
                   '&:hover': {
                     color: '#fff',
                   },
-                }}>
-                Đăng xuất
+                }}
+                className="header_user-btn"
+              >
+                  <p className="header_user-txt">Đăng xuất</p>
               </Button>
               <Button
                 variant="contained"
+                startIcon={<PersonIcon className='header_person-icon' />}
                 disableElevation
                 sx={{
                   background: 'inherit',
@@ -282,14 +300,18 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
                   '&:hover': {
                     color: '#fff',
                   },
-                }}>
-                {JSON.parse(sessionStorage.getItem('user')).name} -{' '}
-                {JSON.parse(sessionStorage.getItem('user')).role.toUpperCase()}
+                }}
+                className="header_user-btn"
+              >
+                  <p className="header_user-txt">
+                    {JSON.parse(sessionStorage.getItem('user')).name} -{' '}
+                    {JSON.parse(sessionStorage.getItem('user')).role.toUpperCase()}
+                  </p>
               </Button>
             </Stack>
           )}
           {!loggedIn && (
-            <Stack direction="row" sx={{ mr: 10 }}>
+            <Stack className="header_not-login" direction="row" sx={{ mr: 10 }}>
               <Button
                 variant="contained"
                 startIcon={<PersonIcon />}
@@ -552,11 +574,11 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
       {openDrawer && (
         <Drawer 
           sx={{ 
-            width: '300px', 
+            width: '250px', 
             backgroundColor: '#fff', 
             flexShrink: 0,
             '& .MuiDrawer-paper': {
-              width: '300px',
+              width: '250px',
               boxSizing: 'border-box',
               transition: 'ease-out 0.5s'
             }, 

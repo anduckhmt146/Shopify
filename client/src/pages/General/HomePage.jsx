@@ -140,8 +140,15 @@ export const HomePage = ({ setLoggedIn }) => {
       },
     ];
     const brandData = brands.map((brand, index) => (
-      <Grid item xs={3} key={index}>
-        <Card elevation={0}>
+      <Grid item xs={12} md={6} lg={3} key={index}>
+        <Card 
+          sx={{
+            display: 'flex',
+            alignContent: 'center',
+            justifyContent: 'center'
+          }}
+          elevation={0}
+        >
           <CardMedia
             component="img"
             image={brand.logo}
@@ -201,7 +208,7 @@ export const HomePage = ({ setLoggedIn }) => {
                 image="https://big.com.my/wp-content/uploads/2022/10/Gift-Voucher-Advertisement-Website_B.I.G-1945x720-V2.png"
                 alt="unsplash img"
                 sx={{
-                  height: '65vh',
+                  height: '30vw',
                   objectFit: 'fill',
                 }}
               />
@@ -210,7 +217,7 @@ export const HomePage = ({ setLoggedIn }) => {
                 image="https://images.bloggiamgia.vn/full/10-02-2023/Shopee-sale-25-1676013217981.png"
                 alt="unsplash img"
                 sx={{
-                  height: '65vh',
+                  height: '30vw',
                   objectFit: 'fill',
                 }}
               />
@@ -219,7 +226,7 @@ export const HomePage = ({ setLoggedIn }) => {
                 image="https://s3.envato.com/files/212168049/Preview%20Images%20Set/02.%20Fashion%20Gift%20Voucher%20Vol.01%20-%20Front-01.jpg"
                 alt="unsplash img"
                 sx={{
-                  height: '65vh',
+                  height: '30vw',
                   objectFit: 'fill',
                 }}
               />
@@ -228,7 +235,7 @@ export const HomePage = ({ setLoggedIn }) => {
                 image="https://img.freepik.com/premium-vector/best-season-sale-banner-design-template_2239-1175.jpg?w=2000"
                 alt="unsplash img"
                 sx={{
-                  height: '65vh',
+                  height: '30vw',
                   objectFit: 'fill',
                 }}
               />
@@ -330,7 +337,11 @@ export const HomePage = ({ setLoggedIn }) => {
             sx={{ fontSize: 40, fontWeight: 700 }}>
             Explore Our Brand
           </Typography>
-          <Grid container spacing={2}>
+          <Grid 
+            container 
+            spacing={2}
+            justifyContent="center"
+          >
             <RenderGrid />
           </Grid>
         </Box>
@@ -342,7 +353,7 @@ export const HomePage = ({ setLoggedIn }) => {
             image="https://raw.githubusercontent.com/anduckhmt146/resource/master/public/342507301_9245703945471694_8487561683018262835_n.png"
             alt="unsplash img"
             sx={{
-              height: '100vh',
+              height: '45vw',
               border: '1px solid #f3f4f6',
             }}
           />
@@ -356,7 +367,15 @@ export const HomePage = ({ setLoggedIn }) => {
         alignItems="center"
         flexDirection="column">
         <Typography mb={2}>Follow Us</Typography>
-        <Stack direction="row">
+        <Stack 
+          direction="row"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}
+        >
           <RenderFollowBtn />
         </Stack>
       </Box>
