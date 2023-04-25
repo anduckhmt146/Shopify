@@ -12,20 +12,34 @@ import {
   InputAdornment,
   Box,
   CardMedia,
+  IconButton,
+  Drawer,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
 } from '@mui/material';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import PersonIcon from '@mui/icons-material/Person';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import './../styles/Header.css'
 import axios from 'axios';
+import { useTheme } from "@mui/material";
 
 export const Header = ({ loggedIn, setLoggedIn }) => {
   const navigate = useNavigate();
+  const theme = useTheme();
+
   const [cateState, setCateState] = useState(false);
   const [colState, setColState] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [categories, setCategories] = useState([]);
   const [collections, setCollections] = useState([]);
+
   useEffect(() => {
     getCategories().then((data) => {
       let ret = [];
@@ -57,10 +71,137 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
     navigate('/login');
   };
 
+  const RenderSideButton = () => {
+    return (
+      <React.Fragment>
+        <Typography
+          onClick={() => {navigate('/home'); setOpenDrawer(false)}}
+          sx={{
+            py: 2,
+            px: 3.2,
+            fontWeight: 600,
+            cursor: 'pointer',
+            '&:hover': {
+              color: '#4bc1f4',
+            },
+            borderBottom: '1px solid #dcdcdc'
+          }}
+        >
+          TRANG CHỦ
+        </Typography>
+        <Typography
+          onClick={() => {navigate('/aboutus'); setOpenDrawer(false)}}
+          sx={{
+            py: 2,
+            px: 3.2,
+            fontWeight: 600,
+            cursor: 'pointer',
+            '&:hover': {
+              color: '#4bc1f4',
+            },
+            borderBottom: '1px solid #dcdcdc'
+          }}
+        >
+          GIỚI THIỆU
+        </Typography>
+        <Typography
+          onClick={() => {navigate('/product'); setOpenDrawer(false)}}
+          sx={{
+            py: 2,
+            px: 3.2,
+            fontWeight: 600,
+            cursor: 'pointer',
+            '&:hover': {
+              color: '#4bc1f4',
+            },
+            borderBottom: '1px solid #dcdcdc'
+          }}
+        >
+          SẢN PHẨM
+        </Typography>
+        <Accordion sx={{ px: '10px', py: '5px' }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography 
+              sx={{
+                fontWeight: 600,
+                cursor: 'pointer',
+                '&:hover': {
+                  color: '#4bc1f4',
+                }
+              }}
+            >
+              PHÂN LOẠI
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            {categories.map((text, index) => (
+              <Typography
+                onClick={() => {navigate('/product'); setOpenDrawer(false)}}
+                key={index}
+                sx={{
+                  p: '10px',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    color: '#4bc1f4',
+                  }
+                }}
+              >
+                {text}
+              </Typography>
+            ))}
+          </AccordionDetails>
+        </Accordion>
+        <Accordion sx={{ px: '10px', py: '5px' }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography
+              sx={{
+                fontWeight: 600,
+                cursor: 'pointer',
+                '&:hover': {
+                  color: '#4bc1f4',
+                }
+              }}
+            >
+              BỘ SƯU TẬP
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            {collections.map((text, index) => (
+              <Typography
+                onClick={() => {navigate('/product'); setOpenDrawer(false)}}
+                key={index}
+                sx={{
+                  p: '10px',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    color: '#4bc1f4',
+                  }
+                }}
+              >
+                {text}
+              </Typography>
+            ))}
+          </AccordionDetails>
+        </Accordion>
+      </React.Fragment>
+    )
+  }
+
   return (
     <React.Fragment>
-      <AppBar sx={{ background: '#fff', pt: 2 }}>
-        <Toolbar>
+      <AppBar sx={{ background: '#fff', pt: 2 }} className="header_ctn">
+        <Toolbar sx={{ position: 'relative' }}>
+          <IconButton sx={{ position: 'absolute' }} onClick={() => setOpenDrawer(true)}>
+            <MenuIcon sx={{fontSize: '30px'}} />
+          </IconButton>
           <Typography
             variant="h6"
             noWrap
@@ -114,7 +255,7 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
                     color: '#fff',
                   },
                 }}>
-                Đơn hàng
+                {console.log(screen.width)}
               </Button>
               <Button
                 variant="contained"
@@ -182,7 +323,7 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
             </Stack>
           )}
         </Toolbar>
-        <Toolbar>
+        <Toolbar className="header_navigation-bar">
           <Button
             disableElevation
             variant="contained"
@@ -408,6 +549,54 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
           </Box>
         )}
       </AppBar>
+      {openDrawer && (
+        <Drawer 
+          sx={{ 
+            width: '300px', 
+            backgroundColor: '#fff', 
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: '300px',
+              boxSizing: 'border-box',
+              transition: 'ease-out 0.5s'
+            }, 
+            position: 'relative',
+            transition: 'ease-out 0.5s'
+          }} 
+          variant="persistent"
+          open={openDrawer}
+          className='header_drawer'
+        >
+          <IconButton 
+            sx={{ 
+              position: 'absolute', 
+              top: '5px', 
+              right: '5px' 
+            }}
+            onClick={() => setOpenDrawer(false)}
+          >
+            <CloseIcon />
+          </IconButton>
+          <Typography
+            display='flex'
+            alignItems='center'
+            sx={{
+              height: '60px',
+              fontSize: '35px',
+              pl: '25px',
+              py: '10px',
+              fontStyle: 'italic',
+              fontWeight: '800',
+              borderBottom: (openDrawer && '1px solid #000')
+            }}
+          >
+            SHOPIFY
+          </Typography>
+          <Stack>
+            <RenderSideButton />
+          </Stack>
+        </Drawer>
+      )}
     </React.Fragment>
   );
 };

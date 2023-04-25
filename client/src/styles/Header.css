@@ -1,4 +1,4 @@
-.header_container {
+/* .header_container {
   position: fixed;
   background-color: #fff;
   padding-top: 16px;
@@ -71,4 +71,17 @@
 
 .header_container .MuiToolbar-root:nth-child(2) .MuiButton-root:nth-child(1) {
   margin-left: 68px;
+} */
+
+.header_ctn .MuiToolbar-root > .MuiIconButton-root {
+  display: none;
+}
+
+@media only screen and (max-width: 1200px) {
+  .header_ctn .header_navigation-bar {
+    display: none;
+  }
+  .header_ctn .MuiToolbar-root > .MuiIconButton-root {
+    display: block;
+  }
 }
