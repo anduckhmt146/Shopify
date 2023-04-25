@@ -13,6 +13,7 @@ import {
   Button,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Carousel from 'react-material-ui-carousel';
 export const HomePage = ({ setLoggedIn }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -194,15 +195,44 @@ export const HomePage = ({ setLoggedIn }) => {
       <Box display="flex" justifyContent="center" alignItems="center">
         <Box sx={{ width: '80%', mt: 22 }}>
           <Card elevation={0}>
-            <CardMedia
-              component="img"
-              image="https://img.freepik.com/premium-vector/best-season-sale-banner-design-template_2239-1175.jpg?w=2000"
-              alt="unsplash img"
-              sx={{
-                height: '70vh',
-                objectFit: 'fill',
-              }}
-            />
+            <Carousel>
+              <CardMedia
+                component="img"
+                image="https://big.com.my/wp-content/uploads/2022/10/Gift-Voucher-Advertisement-Website_B.I.G-1945x720-V2.png"
+                alt="unsplash img"
+                sx={{
+                  height: '65vh',
+                  objectFit: 'fill',
+                }}
+              />
+              <CardMedia
+                component="img"
+                image="https://images.bloggiamgia.vn/full/10-02-2023/Shopee-sale-25-1676013217981.png"
+                alt="unsplash img"
+                sx={{
+                  height: '65vh',
+                  objectFit: 'fill',
+                }}
+              />
+              <CardMedia
+                component="img"
+                image="https://s3.envato.com/files/212168049/Preview%20Images%20Set/02.%20Fashion%20Gift%20Voucher%20Vol.01%20-%20Front-01.jpg"
+                alt="unsplash img"
+                sx={{
+                  height: '65vh',
+                  objectFit: 'fill',
+                }}
+              />
+              <CardMedia
+                component="img"
+                image="https://img.freepik.com/premium-vector/best-season-sale-banner-design-template_2239-1175.jpg?w=2000"
+                alt="unsplash img"
+                sx={{
+                  height: '65vh',
+                  objectFit: 'fill',
+                }}
+              />
+            </Carousel>
           </Card>
         </Box>
       </Box>
