@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
+import './../../styles/HomePage.css'
 export const HomePage = ({ setLoggedIn }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -200,7 +201,7 @@ export const HomePage = ({ setLoggedIn }) => {
   return (
     <React.Fragment>
       <Box display="flex" justifyContent="center" alignItems="center">
-        <Box sx={{ width: '80%', mt: 22 }}>
+        <Box sx={{ width: '80%', mt: 22 }} className='homepage_main-img'>
           <Card elevation={0}>
             <Carousel>
               <CardMedia
@@ -247,6 +248,7 @@ export const HomePage = ({ setLoggedIn }) => {
         display="flex"
         justifyContent="center"
         alignItems="center"
+        className="header_main-component"
         sx={{ mt: 15 }}>
         <Box sx={{ width: '80%' }}>
           <Typography
@@ -275,6 +277,7 @@ export const HomePage = ({ setLoggedIn }) => {
           display="flex"
           justifyContent="space-between"
           alignItems="center"
+          className="header_main-component"
           sx={{ width: '80%', mt: 10 }}>
           <Card elevation={0} sx={{ width: '49%' }}>
             <CardMedia
@@ -302,6 +305,7 @@ export const HomePage = ({ setLoggedIn }) => {
         display="flex"
         justifyContent="center"
         alignItems="center"
+        className="header_main-component"
         sx={{ mt: 15 }}>
         <Box sx={{ width: '80%' }}>
           <Typography
@@ -328,7 +332,9 @@ export const HomePage = ({ setLoggedIn }) => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        sx={{ mt: 15 }}>
+        sx={{ mt: 15 }}
+        className="header_main-component"
+      >
         <Box sx={{ width: '80%' }}>
           <Typography
             gutterBottom
@@ -346,7 +352,13 @@ export const HomePage = ({ setLoggedIn }) => {
           </Grid>
         </Box>
       </Box>
-      <Box sx={{ width: '100%', mt: 10 }}>
+      <Box 
+        sx={{ 
+          width: '100%', 
+          mt: 10 
+        }}
+        className="header_main-component"
+      >
         <Card elevation={0}>
           <CardMedia
             component="img"
@@ -365,7 +377,9 @@ export const HomePage = ({ setLoggedIn }) => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        flexDirection="column">
+        flexDirection="column"
+        className="header_main-component"
+      >
         <Typography mb={2}>Follow Us</Typography>
         <Stack 
           direction="row"

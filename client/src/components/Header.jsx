@@ -571,54 +571,51 @@ export const Header = ({ loggedIn, setLoggedIn }) => {
           </Box>
         )}
       </AppBar>
-      {openDrawer && (
-        <Drawer 
+      <Drawer 
+        sx={{ 
+          width: '250px', 
+          backgroundColor: '#fff', 
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: '250px',
+            boxSizing: 'border-box',
+          }, 
+          position: 'relative',
+          transition: 'ease-out 0.3s !important'
+        }} 
+        variant="persistent"
+        open={openDrawer}
+        className='header_drawer'
+      >
+        <IconButton 
           sx={{ 
-            width: '250px', 
-            backgroundColor: '#fff', 
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              width: '250px',
-              boxSizing: 'border-box',
-              transition: 'ease-out 0.5s'
-            }, 
-            position: 'relative',
-            transition: 'ease-out 0.5s'
-          }} 
-          variant="persistent"
-          open={openDrawer}
-          className='header_drawer'
+            position: 'absolute', 
+            top: '5px', 
+            right: '5px' 
+          }}
+          onClick={() => setOpenDrawer(false)}
         >
-          <IconButton 
-            sx={{ 
-              position: 'absolute', 
-              top: '5px', 
-              right: '5px' 
-            }}
-            onClick={() => setOpenDrawer(false)}
-          >
-            <CloseIcon />
-          </IconButton>
-          <Typography
-            display='flex'
-            alignItems='center'
-            sx={{
-              height: '60px',
-              fontSize: '35px',
-              pl: '25px',
-              py: '10px',
-              fontStyle: 'italic',
-              fontWeight: '800',
-              borderBottom: (openDrawer && '1px solid #000')
-            }}
-          >
-            SHOPIFY
-          </Typography>
-          <Stack>
-            <RenderSideButton />
-          </Stack>
-        </Drawer>
-      )}
+          <CloseIcon />
+        </IconButton>
+        <Typography
+          display='flex'
+          alignItems='center'
+          sx={{
+            height: '60px',
+            fontSize: '35px',
+            pl: '25px',
+            py: '10px',
+            fontStyle: 'italic',
+            fontWeight: '800',
+            borderBottom: (openDrawer && '1px solid #000')
+          }}
+        >
+          SHOPIFY
+        </Typography>
+        <Stack>
+          <RenderSideButton />
+        </Stack>
+      </Drawer>
     </React.Fragment>
   );
 };
