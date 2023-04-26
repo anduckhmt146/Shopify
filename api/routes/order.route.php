@@ -21,4 +21,44 @@
             echo json_encode(['msg' => $e->getMessage()]);
             http_response_code($e->getStatusCode());
         }
-    } //api/products/detail?code=
+    } //api/orders/detail?code= // code of 1 order
+    elseif($url['3'] == 'detail' and $method=='GET'){
+        try {
+            echo OrderController::getOrder($params['code']);
+            http_response_code(200);
+        } catch (CustomError $e) {
+            echo json_encode(['msg' => $e->getMessage()]);
+            http_response_code($e->getStatusCode());
+        }
+    }
+    //api/orders/allOrder?CustomerID=
+    elseif($url['3'] == 'allOrder' and $method=='GET'){
+        try {
+            echo OrderController::getAllOrder($params['CustomerID']);
+            http_response_code(200);
+        } catch (CustomError $e) {
+            echo json_encode(['msg' => $e->getMessage()]);
+            http_response_code($e->getStatusCode());
+        }
+    }
+    //api/orders/confirm
+    elseif($url['3'] == 'confirm' and $method=='PUT'){
+        try {
+            $data = (array) json_decode(file_get_contents('php://input'));
+            echo OrderController::confirm($params['OrderID']);
+            http_response_code(200);
+        } catch (CustomError $e) {
+            echo json_encode(['msg' => $e->getMessage()]);
+            http_response_code($e->getStatusCode());
+        }
+    }
+    elseif($url['3'] == 'chart' and $method=='GET'){
+        try {
+            echo OrderController::chart();
+            http_response_code(200);
+        } catch (CustomError $e) {
+            echo json_encode(['msg' => $e->getMessage()]);
+            http_response_code($e->getStatusCode());
+        }
+    }
+

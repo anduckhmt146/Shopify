@@ -18,6 +18,7 @@ class Order
             $query = "SELECT * FROM orders WHERE CustomerID='$id';";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             throw new InternalServerError('Server Error !');
         }
@@ -28,6 +29,7 @@ class Order
             $query = "SELECT * FROM orders JOIN include ON orders.OrderID = include.OrderID WHERE orders.OrderID='$id'";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             throw new InternalServerError('Server Error !');
         }
@@ -38,6 +40,7 @@ class Order
             $query = "UPDATE orders SET status = 1  WHERE OrderID='$id'";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
+            
         } catch (mysqli_sql_exception $e) {
             throw new InternalServerError('Server Error !');
         }
@@ -66,6 +69,17 @@ class Order
             $query = "DELETE FROM add_to_cart WHERE CustomerID='$CUSTOMER'";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
+        } catch (mysqli_sql_exception $e) {
+            throw new InternalServerError('Server Error !');
+        }
+    }
+    public function chart()
+    { // id of customer
+        try {
+            $query = "SELECT month(date_time) AS MONTH, sum(total_cost) AS TOTAL_COST from orders group by month(date_time);";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             throw new InternalServerError('Server Error !');
         }
