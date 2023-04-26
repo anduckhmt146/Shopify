@@ -40,7 +40,10 @@ class Order
             $query = "UPDATE orders SET status = 1  WHERE OrderID='$id'";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
-            
+            $query = "UPDATE product AS P, include AS I SET QUANITY = QUANITY - NUMBER 
+            WHERE CODE = ProductID AND P.COLOR=I.COLOR AND P.SIZE = I.SIZE AND OrderID='$id';";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
         } catch (mysqli_sql_exception $e) {
             throw new InternalServerError('Server Error !');
         }
@@ -77,6 +80,17 @@ class Order
     { // id of customer
         try {
             $query = "SELECT month(date_time) AS MONTH, sum(total_cost) AS TOTAL_COST from orders group by month(date_time);";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt->get_result();
+        } catch (mysqli_sql_exception $e) {
+            throw new InternalServerError('Server Error !');
+        }
+    }
+    public function getAll_Admin()
+    { // id of 1 order
+        try {
+            $query = "SELECT * FROM orders";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->get_result();

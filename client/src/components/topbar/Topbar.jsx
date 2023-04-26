@@ -5,6 +5,7 @@ import { List, IconButton, ListItem, ListItemAvatar, ListItemText, Avatar } from
 import DeleteIcon from '@mui/icons-material/Delete';
 import FolderIcon from '@mui/icons-material/Folder';
 import { userData } from '../../dummyData';
+import { Link } from 'react-router-dom';
 export default function Topbar() {
   const demodata = ["anh", "duc", "like", "h"];
   const [dense, setDense] = React.useState(false);
@@ -17,10 +18,10 @@ export default function Topbar() {
     <div className="topbar">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <span className="logo">lamaadmin</span>
+          <span className="logo">Shopify</span>
         </div>
         <div className="topRight">
-          <div className="topbarIconContainer" onClick={()=>{setNoti(!noti)}}>
+          {/* <div className="topbarIconContainer" onClick={()=>{setNoti(!noti)}}>
             <NotificationsNone />
             <span className="topIconBadge">{data.length}</span> </div>
             {noti ? 
@@ -47,16 +48,13 @@ export default function Topbar() {
                 ))}
             </List>
             </div>
-            : null}
-          {/* </div> */}
+            : null} */}
           <div className="topbarIconContainer">
-            <Language />
-            <span className="topIconBadge">2</span>
+          {JSON.parse(sessionStorage.getItem('user')).name}
           </div>
-          <div className="topbarIconContainer">
-            <Settings />
-          </div>
-          <img src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="topAvatar" />
+          <Link to = {"http://localhost:3000/dashboard/user/"+JSON.parse(sessionStorage.getItem('user')).username}>
+          <Avatar src={JSON.parse(sessionStorage.getItem('user')).avatar} alt="" className="topAvatar" />
+          </Link>
         </div>
       </div>
     </div>

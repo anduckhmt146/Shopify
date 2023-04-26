@@ -49,8 +49,10 @@ export const LoginPage = ({ setLoggedIn }) => {
           name: res.data.data.name,
           token: res.data.data.token,
           role: res.data.data.role,
+          username: res.data.data.username
         };
         sessionStorage.setItem('user', JSON.stringify(dataResponse));
+        console.log(JSON.parse(sessionStorage.getItem('user')));
       })
       .then(() => {
         setLoggedIn(true);

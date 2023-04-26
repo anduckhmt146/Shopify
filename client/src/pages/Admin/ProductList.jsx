@@ -80,7 +80,7 @@ export default function ProductList() {
         disableSelectionOnClick
         columns={columns}
         pageSize={8}
-        checkboxSelection
+        // checkboxSelection
       />
     </div>
   );

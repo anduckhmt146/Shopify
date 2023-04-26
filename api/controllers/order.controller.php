@@ -54,4 +54,15 @@ class OrderController
         
         // throw new FileNotFoundError("Product not found !");
     }
+    public static function getAllAdmin()
+    {
+        $temp = new Order();
+        $new = $temp->getAll_Admin();
+        if ($new->num_rows > 0) {
+            $rows = $new->fetch_all(MYSQLI_ASSOC);
+            $rows = json_encode($rows);
+            return $rows;
+        }
+        throw new FileNotFoundError("Product not found !");
+    }
 }

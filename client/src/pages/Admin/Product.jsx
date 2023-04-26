@@ -120,24 +120,32 @@ export default function Product() {
 
   const handleSize = (event) => {
     setSize(event.target.value);
-    handleEditQuantity();
   };
 
   const handleColor = (event) => {
     setColor(event.target.value);
-    handleEditQuantity();
   };
 
   const [isRestock, setIsRestock] = useState(false);
   const handleRestok = () => {
     setIsRestock(!isRestock);
   };
+  const [chart, setChart] = useState([]);
+  useEffect(()=>{
+    axios
+    .get(
+      `http://localhost:8080/api/products/chart?code=${id}`
+    )
+    .then((result) => {
+      console.log(result.data);
+      setChart(result.data);
+    })
+    .catch((error) => console.log(error));
+  },[])
 
-  const handleEditQuantity = async () => {
-    console.log(color);
-    console.log(size);
-    if (color != '' && size != '') {
-      await axios
+  useEffect(()=>{
+    if (color!= '' && size!= '') {
+      axios
         .get(
           `http://localhost:8080/api/products/get_quanity?id=${id}&&color=${color}&&size=${size}`
         )
@@ -147,7 +155,25 @@ export default function Product() {
         })
         .catch((error) => console.log(error));
     }
-  };
+  },[color, size])
+  var newChart={};
+// month: 3, number: 1000 -> 3:1000
+  for (const element of chart){
+
+
+  }
+  const chartData = [{name: 'Jan', Sales: 0,}, {name: 'Feb', Sales: 0,}, {name: 'Mar', Sales: 0,}, {name: 'Apr', Sales: 0,}, {name: 'May', Sales: 0,}, {name: 'Jun', Sales: 0,}
+                    ,{name: 'Jul', Sales: 0,}, {name: 'Aug', Sales: 0,}, {name: 'Sep', Sales: 0,}, {name: 'Oct', Sales: 0,}, {name: 'Nov', Sales: 0,}, {name: 'Dec', Sales: 0,}];
+  for (let index = 0; index < chartData.length; index++) {
+    console.log(chartData[index]['Sales']);
+    for (let i = 0; i < chart.length; i++) {
+      if (chart[i]['MONTH'] == index + 1){
+        chartData[index]['Sales'] = chart[i]['NUMBER'];
+        break;
+      }
+    }
+  }
+  console.log(chartData);
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -158,9 +184,9 @@ export default function Product() {
       </div>
       <div className="productTop">
         <div className="productTopLeft">
-          <Chart data={productData} dataKey="Sales" title="Sales Performance" />
+          <Chart data={chartData} dataKey="Sales" title="Sales Performance" />
         </div>
-        <div className="productTopRight">
+        {/* <div className="productTopRight">
           <div className="productInfoTop">
             <img
               src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
@@ -187,7 +213,7 @@ export default function Product() {
               <span className="productInfoValue">no</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="productBottom">
         {/* RESTOCK */}
@@ -299,8 +325,7 @@ export default function Product() {
                         onChange={handleColor}>
                         {color_list.map((item) => (
                           <MenuItem value={item}>
-                            {item}
-                            {/* <Button fullWidth sx={{backgroundColor: `${item}`}}></Button> */}
+                            <Button sx={{backgroundColor: `${item}`}}></Button>
                           </MenuItem>
                         ))}
                       </Select>

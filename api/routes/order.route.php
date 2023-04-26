@@ -45,7 +45,7 @@
     elseif($url['3'] == 'confirm' and $method=='PUT'){
         try {
             $data = (array) json_decode(file_get_contents('php://input'));
-            echo OrderController::confirm($params['OrderID']);
+            echo OrderController::confirm($data['OrderID']);
             http_response_code(200);
         } catch (CustomError $e) {
             echo json_encode(['msg' => $e->getMessage()]);
@@ -55,6 +55,15 @@
     elseif($url['3'] == 'chart' and $method=='GET'){
         try {
             echo OrderController::chart();
+            http_response_code(200);
+        } catch (CustomError $e) {
+            echo json_encode(['msg' => $e->getMessage()]);
+            http_response_code($e->getStatusCode());
+        }
+    }
+    elseif($url['3'] == 'all' and $method=='GET'){
+        try {
+            echo OrderController::getAllAdmin();
             http_response_code(200);
         } catch (CustomError $e) {
             echo json_encode(['msg' => $e->getMessage()]);

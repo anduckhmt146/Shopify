@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -33,23 +32,44 @@ const ProductColor = styled.div`
   height: 20px;
   border-radius: 50%;
   background-color: ${(props) => props.color};
-  margin-top: 10px;
 `;
 
 const ProductSize = styled.span``;
 
-export const ProductItem = (props) => {
-  const {
-    thumbNail,
-    title,
-    id,
-    size,
-    color,
-    quantity,
-    price,
-    inStock,
-    saleOff,
-  } = props;
+const PriceDetail = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+const ProductAmountContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const ProductAmount = styled.div`
+  font-size: 24px;
+  margin: 5px;
+`;
+
+const ProductPrice = styled.div`
+  font-size: 30px;
+  font-weight: 200;
+  margin-top: 20px;
+`;
+
+export const ProductItem = ({
+  thumbNail,
+  title,
+  id,
+  size,
+  color,
+  quantity,
+  price,
+}) => {
+  const [num, setNum] = useState(quantity);
   return (
     <Product
       style={{
@@ -63,40 +83,23 @@ export const ProductItem = (props) => {
         <Image src={thumbNail} />
         <Details>
           <ProductName>
-            <b>Tên sản phẩm: {title}</b>
+            <b>Product: {title}</b>
           </ProductName>
           <ProductId>
-            <b>Code: {id}</b>
+            <b>ID: {id}</b>
           </ProductId>
-          <ProductId>
-            <b>Màu sắc: </b>
-            <ProductColor color={color} />
-          </ProductId>
+          <ProductColor color={color} />
           <ProductSize>
-            <b>Kích cỡ: {size}</b>
-          </ProductSize>
-          <ProductSize>
-            <b>Số lượng: {quantity}</b>
-          </ProductSize>
-          <ProductSize>
-            <b>Tồn kho: {inStock}</b>
-          </ProductSize>
-          <ProductSize>
-            <b>Giảm giá: {saleOff * 100}%</b>
-          </ProductSize>
-          <ProductSize>
-            <b>
-              Giá:{' '}
-              <b style={{ fontWeight: 'bold' }}>
-                $ {Math.round(price * (1 - saleOff))}{' '}
-                <b style={{ color: 'red', textDecoration: 'line-through' }}>
-                  $ {price}
-                </b>
-              </b>
-            </b>
+            <b>Size: {size}</b>
           </ProductSize>
         </Details>
       </ProductDetail>
+      <PriceDetail>
+        <ProductAmountContainer>
+          <ProductAmount>Quantity: {num}</ProductAmount>
+        </ProductAmountContainer>
+        <ProductPrice>${price}</ProductPrice>
+      </PriceDetail>
     </Product>
   );
 };

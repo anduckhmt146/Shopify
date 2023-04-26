@@ -67,9 +67,7 @@ export const ProductDetailPage = () => {
     return await getProducts().then((res) => {
       setProducts(res);
       setMainImg(res[0].IMG1);
-      setColor(res[0].COLOR.split(','));
-      setColorSelected(res[0].COLOR.split(',')[0]);
-      setSize(res[0].SIZE.split(',')[0]);
+      setColor(handleColor(res[0].COLOR));
     });
   };
   useEffect(() => {
@@ -81,7 +79,35 @@ export const ProductDetailPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [tab, setTab] = useState(1);
   const [colors, setColor] = useState(['red']);
-  const [colorSelected, setColorSelected] = useState('');
+  const ProductColor = styled.div`
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 10px;
+    background-color: ${(props) => props.color};
+  `;
+  const handleSize = (e) => {
+    setSize(e.target.value);
+  };
+  const handleColor = (data) => {
+    let ret = [];
+    const vietColor = ['Đỏ', 'Xanh', 'Vàng', 'Cam', 'Hồng', 'Đen', 'Trắng'];
+    const engColor = [
+      'red',
+      'blue',
+      'yellow',
+      'orange',
+      'pink',
+      'black',
+      'white',
+    ];
+    for (let i = 0; i < vietColor.length; i++) {
+      if (data.includes(vietColor[i])) {
+        ret.push(engColor[i]);
+      }
+    }
+    return ret;
+  };
   const handleQuantity = (val) => {
     let tmp = quantity;
 
@@ -92,34 +118,10 @@ export const ProductDetailPage = () => {
     else setQuantity(1);
   };
   const handleClickAdd = () => {
-    let isCustomer = '';
-    let customerID = '';
-    if (sessionStorage.getItem('user')) {
-      isCustomer = JSON.parse(sessionStorage.getItem('user')).name;
-      customerID = JSON.parse(sessionStorage.getItem('user')).id;
-    } else {
+    let isCustomer = sessionStorage.getItem('user') != null;
+    if (isCustomer == false) {
       setOpen(true);
-      return;
     }
-    axios({
-      method: 'post',
-      url: 'http://localhost:8080/api/cart/add',
-      data: {
-        CustomerID: customerID,
-        CODE: code,
-        COLOR: colorSelected,
-        SIZE: size,
-        NUM: quantity,
-      },
-    })
-      .then((res) => {
-        console.log('Success');
-      })
-      .catch((res) => {
-        console.log('Error');
-        console.log(res);
-      });
-    console.log(customerID, code, colorSelected, size, quantity);
   };
   const handleClickBuy = () => {
     let isCustomer = JSON.parse(sessionStorage.getItem('user')) != null;
@@ -132,7 +134,11 @@ export const ProductDetailPage = () => {
   const RenderImage = () => {
     let img;
     if (products.length == 0) {
-      return <div></div>;
+      img = [
+        'https://picsum.photos/1900/800',
+        'https://picsum.photos/1900/800',
+        'https://picsum.photos/1900/800',
+      ];
     } else {
       img = [products[0].IMG1, products[0].IMG2, products[0].IMG3];
     }
@@ -157,9 +163,6 @@ export const ProductDetailPage = () => {
   };
 
   const RenderBestSeller = () => {
-    if (items.length == 0) {
-      return <div></div>;
-    }
     const data = items.map((item, index) => (
       <Card
         className="product-detail_recommend-image"
@@ -328,9 +331,6 @@ export const ProductDetailPage = () => {
   };
 
   const RenderDescription = () => {
-    if (products.length == 0) {
-      return <div></div>;
-    }
     return (
       <Stack className="product-detail_comment-content">
         <Typography sx={{ fontSize: 20, fontWeight: 'bold' }}>
@@ -390,21 +390,14 @@ export const ProductDetailPage = () => {
                     </Typography>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
-                      value={colorSelected}
+                      defaultValue={colors[0]}
                       name="radio-buttons-group"
                       row>
-                      {colors.map((color) => (
+                      {colors.map((text) => (
                         <FormControlLabel
-                          value={color}
-                          control={<Radio />}
-                          onChange={(e) => {
-                            setColorSelected(e.target.value);
-                          }}
-                          sx={{
-                            '& .Mui-checked': {
-                              color: colorSelected,
-                            },
-                          }}
+                          key={text}
+                          value={text}
+                          control={<ProductColor color={text} />}
                         />
                       ))}
                     </RadioGroup>
@@ -416,7 +409,7 @@ export const ProductDetailPage = () => {
                     <ToggleButtonGroup
                       value={size}
                       exclusive
-                      onChange={(e) => setSize(e.target.value)}
+                      onChange={handleSize}
                       aria-label="size">
                       {products[0].SIZE.split(',').map((text) => (
                         <ToggleButton

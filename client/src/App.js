@@ -21,11 +21,15 @@ import DashBoard from './pages/Admin/DashBoard';
 import { MyOrderPage } from './pages/Customer/MyOrderPage';
 import { OrderDetailPage } from './pages/Customer/OrderDetailPage';
 import CartPage from './pages/Customer/CartPage';
+import { PaymentPage } from './pages/Customer/PaymentPage';
+import OrderList from './pages/Admin/OrderList';
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   let isAdmin = '';
   if (loggedIn == true) {
     isAdmin = JSON.parse(sessionStorage.getItem('user')).role;
+  } else {
+    sessionStorage.removeItem('user');
   }
   return (
     <Box>
@@ -52,7 +56,7 @@ function App() {
             }
           />
         )}
-        {isAdmin != 'admin' && (
+        {isAdmin == 'customer' && (
           <Route
             path="/home"
             element={
@@ -107,6 +111,14 @@ function App() {
           element={
             <UserLayout loggedIn={loggedIn} setLoggedIn={setLoggedIn}>
               <CartPage />
+            </UserLayout>
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            <UserLayout loggedIn={loggedIn} setLoggedIn={setLoggedIn}>
+              <PaymentPage />
             </UserLayout>
           }
         />
@@ -207,6 +219,18 @@ function App() {
               <div className="container">
                 <Sidebar />
                 <NewProduct />
+              </div>
+            </div>
+          }
+        />
+        <Route
+          path="/dashboard/orders"
+          element={
+            <div>
+              <Topbar />
+              <div className="container">
+                <Sidebar />
+                <OrderList/>
               </div>
             </div>
           }
