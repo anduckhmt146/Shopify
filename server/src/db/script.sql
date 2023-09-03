@@ -44,8 +44,8 @@ CREATE TABLE PRODUCT(
     CHECK(PRICE>=0)
 );
 
-CREATE TABLE CUSTOMER(
-	CustomerID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE USER(
+	USERID INT AUTO_INCREMENT PRIMARY KEY,
     Phone_Number VARCHAR(10),
     USERNAME VARCHAR(20) UNIQUE,
     PASSWORD VARCHAR(20),
@@ -57,7 +57,7 @@ CREATE TABLE CUSTOMER(
 
 CREATE TABLE ORDERS(
 	OrderID INT AUTO_INCREMENT PRIMARY KEY,
-    CustomerID INT,
+    USERID INT,
     NAME VARCHAR(20),
     TOTAL_PRODUCT INT,
     TOTAL_COST FLOAT,
@@ -67,7 +67,7 @@ CREATE TABLE ORDERS(
     RECEIVE_ADDRESS TEXT,
     CHECK (TOTAL_PRODUCT>0),
     CHECK (TOTAL_COST>0),
-	FOREIGN KEY (CustomerID) REFERENCES CUSTOMER(CustomerID) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (USERID) REFERENCES USER(USERID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 ALTER TABLE ORDERS ADD COLUMN STATUS BOOLEAN DEFAULT 0;
 ALTER TABLE ORDERS ADD COLUMN DATE_TIME DATETIME  DEFAULT CURRENT_TIMESTAMP;
@@ -95,17 +95,17 @@ CREATE TABLE ADD_TO_CART(
 	ProductID VARCHAR(15),
 	COLOR VARCHAR(20),
     SIZE VARCHAR(10),
-    CustomerID INT,
+    USERID INT,
     NUMBER INT,
-    primary key (ProductID,COLOR,SIZE,CustomerID),
+    primary key (ProductID,COLOR,SIZE,USERID),
 	FOREIGN KEY (ProductID,SIZE,COLOR) REFERENCES PRODUCT(CODE,SIZE,COLOR) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (CustomerID) REFERENCES CUSTOMER(CustomerID) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (USERID) REFERENCES USER(USERID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE COMMENTS(
 	CommentID INT auto_increment PRIMARY KEY,
 	ProductID VARCHAR(15),
-    CustomerID INT,
+    USERID INT,
     RATING INT,
     DATE_TIME TIMESTAMP,
     IMG TEXT,
@@ -114,7 +114,7 @@ CREATE TABLE COMMENTS(
     PARENT_ID INT, 
     FOREIGN KEY (PARENT_ID) REFERENCES COMMENTS(CommentID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (ProductID) REFERENCES PRODUCT(CODE) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (CustomerID) REFERENCES CUSTOMER(CustomerID) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (USERID) REFERENCES USER(USERID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- DROP DATABASE LTW
@@ -135,34 +135,34 @@ INSERT INTO `ltw`.`categories` (`NAME`, `GENDER`) VALUES ('Áo Sơ Mi Tay Ngắn
 INSERT INTO `ltw`.`categories` (`NAME`, `GENDER`) VALUES ('Áo Sơ Mi Họa Tiết', '1');
 INSERT INTO `ltw`.`categories` (`NAME`, `GENDER`) VALUES ('Áo Sơ Mi Kiểu', '1');
 
--- customer
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0852531027', 'ducan1406', '123456', 'Nguyễn Đức An', '2002-06-14', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'customer');
+-- USER
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0852531027', 'ducan1406', '123456', 'Nguyễn Đức An', '2002-06-14', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'USER');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0812586985', 'datdat123', '123456', 'Lê Phước Đạt', '2002-05-20', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'customer');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0812586985', 'datdat123', '123456', 'Lê Phước Đạt', '2002-05-20', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'USER');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0794763040', 'ducduong123', '123456', 'Dương Huỳnh Anh Đức', '2002-02-01', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'admin');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0794763040', 'ducduong123', '123456', 'Dương Huỳnh Anh Đức', '2002-02-01', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'admin');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0794763040', 'thuthao0611', '123456', 'Trần Thị Thu Thảo', '2002-02-01', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'admin');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0794763040', 'thuthao0611', '123456', 'Trần Thị Thu Thảo', '2002-02-01', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'admin');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0903228745', 'lac123', '123456', 'Ngụy Anh Lạc', '2001-03-05', 'https://th.bing.com/th/id/R.0a8dfabc06847d163f5d82b41c8a5553?rik=h1peRQORlGvAwQ&pid=ImgRaw&r=0', 'customer');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0903228745', 'lac123', '123456', 'Ngụy Anh Lạc', '2001-03-05', 'https://th.bing.com/th/id/R.0a8dfabc06847d163f5d82b41c8a5553?rik=h1peRQORlGvAwQ&pid=ImgRaw&r=0', 'USER');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0895234412', 'anh123', '123456', 'Ô Diệp Kỳ Anh', '2003-08-12', 'https://th.bing.com/th/id/R.7033c066472691e4a77fc2ff05888e9b?rik=lyYSkGd4O16kdA&pid=ImgRaw&r=0', 'admin');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0895234412', 'anh123', '123456', 'Ô Diệp Kỳ Anh', '2003-08-12', 'https://th.bing.com/th/id/R.7033c066472691e4a77fc2ff05888e9b?rik=lyYSkGd4O16kdA&pid=ImgRaw&r=0', 'admin');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0453897620', 'bich123', '123456', 'Ô Nhã Thành Bích', '2004-01-14', 'https://th.bing.com/th/id/R.1e2a1d5bd9cb34a519751d0193410524?rik=5bAUzJJmydpTyw&pid=ImgRaw&r=0', 'customer');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0453897620', 'bich123', '123456', 'Ô Nhã Thành Bích', '2004-01-14', 'https://th.bing.com/th/id/R.1e2a1d5bd9cb34a519751d0193410524?rik=5bAUzJJmydpTyw&pid=ImgRaw&r=0', 'USER');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0978564731', 'anh456', '123456', 'Lưu Thanh Anh', '1999-07-12', 'https://th.bing.com/th/id/OIP.meLqBXY9bIKdBi8-vuh5EAHaJ5?pid=ImgDet&w=576&h=770&rs=1', 'customer');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0978564731', 'anh456', '123456', 'Lưu Thanh Anh', '1999-07-12', 'https://th.bing.com/th/id/OIP.meLqBXY9bIKdBi8-vuh5EAHaJ5?pid=ImgDet&w=576&h=770&rs=1', 'USER');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0654893018', 'khai123', '123456', 'Hứa Khải', '1997-09-16', 'https://th.bing.com/th/id/R.5e01d11c56c5e3ccca69b807f00928a5?rik=aqhfhXNospFRfA&pid=ImgRaw&r=0', 'customer');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0654893018', 'khai123', '123456', 'Hứa Khải', '1997-09-16', 'https://th.bing.com/th/id/R.5e01d11c56c5e3ccca69b807f00928a5?rik=aqhfhXNospFRfA&pid=ImgRaw&r=0', 'USER');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0786543781', 'anh789', '123456', 'Trần Quốc Anh', '1995-12-03', 'https://img3.thuthuatphanmem.vn/uploads/2019/07/05/hinh-anh-con-gai-cat-toc-ngan-dep_082838188.jpg', 'customer');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0786543781', 'anh789', '123456', 'Trần Quốc Anh', '1995-12-03', 'https://img3.thuthuatphanmem.vn/uploads/2019/07/05/hinh-anh-con-gai-cat-toc-ngan-dep_082838188.jpg', 'USER');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0123987591', '123456', 'quan123', 'Kim Siêu Quần', '1988-03-04', 'https://th.bing.com/th/id/OIP.uYqpZo0HcDu0Ky0YL9jU-wHaLH?pid=ImgDet&w=540&h=810&rs=1', 'customer');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0123987591', '123456', 'quan123', 'Kim Siêu Quần', '1988-03-04', 'https://th.bing.com/th/id/OIP.uYqpZo0HcDu0Ky0YL9jU-wHaLH?pid=ImgDet&w=540&h=810&rs=1', 'USER');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0967345192', 'kinh123', '123456', 'Hà Gia Kính', '1989-05-06', 'https://1.bp.blogspot.com/-nrYtNPt3VFQ/X2bKuRwHGLI/AAAAAAAACQw/Z6SIXczOEA0CbmG_i8JpsIKqYAMSqRoeQCLcBGAsYHQ/s750/13.jpg', 'customer');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0967345192', 'kinh123', '123456', 'Hà Gia Kính', '1989-05-06', 'https://1.bp.blogspot.com/-nrYtNPt3VFQ/X2bKuRwHGLI/AAAAAAAACQw/Z6SIXczOEA0CbmG_i8JpsIKqYAMSqRoeQCLcBGAsYHQ/s750/13.jpg', 'USER');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0765947867', 'hien123', '123456', 'Phạm pink Hiên', '1990-09-08', 'https://th.bing.com/th/id/OIP.gu5TDePDIlQVfpZxyvP7FAHaEc?pid=ImgDet&rs=1', 'customer');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0765947867', 'hien123', '123456', 'Phạm pink Hiên', '1990-09-08', 'https://th.bing.com/th/id/OIP.gu5TDePDIlQVfpZxyvP7FAHaEc?pid=ImgDet&rs=1', 'USER');
 
-INSERT INTO `ltw`.`customer` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0674679310', 'man123','123456', 'Xa Thi Mạn', '1989-10-11', 'https://th.bing.com/th/id/OIP.R806Nu3w4G_GzlXPu4FqqQHaK8?pid=ImgDet&w=502&h=742&rs=1', 'admin');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0674679310', 'man123','123456', 'Xa Thi Mạn', '1989-10-11', 'https://th.bing.com/th/id/OIP.R806Nu3w4G_GzlXPu4FqqQHaK8?pid=ImgDet&w=502&h=742&rs=1', 'admin');
 
 -- Product
 INSERT INTO `ltw`.`product` (`CODE`, `NAME`, `COLOR`, `SIZE`, `MATERIAL`, `DESCRIPTION`, `QUANITY`, `SALEOFF`, `PRICE`, `IMG1`, `IMG2`, `IMG3`, `IMG4`, `CATEGORY_ID`) VALUES ('DC09071', 'Đầm nhún eo cổ nơ', 'black', 'XS', 'VOAN PHỐI COTTON', 'Váy liền giữa áo sơ mi và chân váy mang lại vẻ sang trọng, tiện lợi', '200', '0.5', '530000', 'https://js0fpsb45jobj.vcdn.cloud/storage/upload/media/gumac/DC09071/2-HONG-DC09071.jpg', 'https://js0fpsb45jobj.vcdn.cloud/storage/upload/media/gumac/DC09071/3-HONG-DC09071.jpg', 'https://js0fpsb45jobj.vcdn.cloud/storage/upload/media/gumac/DC09071/4-HONG-DC09071.jpg', 'https://js0fpsb45jobj.vcdn.cloud/storage/upload/media/gumac/DC09071/5-HONG-DC09071.jpg', '1');
@@ -191,11 +191,11 @@ INSERT INTO `ltw`.`in_collection` (`ProductCode`, `CollectID`) VALUES ('DC11098'
 INSERT INTO `ltw`.`in_collection` (`ProductCode`, `CollectID`) VALUES ('DC12067', '3');
 
 -- orders
-INSERT INTO `ltw`.`orders` (`OrderID`, `CustomerID`, `NAME`, `TOTAL_PRODUCT`, `TOTAL_COST`, `PAY_METHOD`, `RECEIVE_PHONE`, `RECEIVE_ADDRESS`) VALUES ('00001', '2', 'Nguyen Duc An', '2', '460000', 'cash', '0794763040', 'Gò Vấp, TP.HCM');
-INSERT INTO `ltw`.`orders` (`OrderID`, `CustomerID`, `NAME`, `TOTAL_PRODUCT`, `TOTAL_COST`, `PAY_METHOD`, `RECEIVE_PHONE`, `RECEIVE_ADDRESS`) VALUES ('00002', '4', 'Le Phuoc Dat', '1', '230000', 'momo', '0459835899', '7/38A Cao Lãnh, quận 8, TP.HCM');
-INSERT INTO `ltw`.`orders` (`OrderID`, `CustomerID`, `NAME`, `TOTAL_PRODUCT`, `TOTAL_COST`, `PAY_METHOD`, `RECEIVE_PHONE`, `RECEIVE_ADDRESS`) VALUES ('00003', '5', 'Duong Huynh Anh Duc', '1', '240000', 'cash', '0796757342', '102 Nguyễn Văn Nghi, phường 5, quận Gò Vấp, TP.HCM');
-INSERT INTO `ltw`.`orders` (`OrderID`, `CustomerID`, `NAME`, `TOTAL_PRODUCT`, `TOTAL_COST`, `PAY_METHOD`, `RECEIVE_PHONE`, `RECEIVE_ADDRESS`) VALUES ('00004', '6', 'Tran Thi Thu Thao', '1', '200000', 'cash', '0972334457', '112 Huỳnh Văn Bánh, Phú Nhuận, TP.HCM');
-INSERT INTO `ltw`.`orders` (`OrderID`, `CustomerID`, `NAME`, `TOTAL_PRODUCT`, `TOTAL_COST`, `PAY_METHOD`, `RECEIVE_PHONE`, `RECEIVE_ADDRESS`) VALUES ('00005', '7', 'Kim Su Quan', '2', '500000', 'bank', '0123215568', '449E Lê Quang Định, Bình Thạnh, TP.HCM');
+INSERT INTO `ltw`.`orders` (`OrderID`, `USERID`, `NAME`, `TOTAL_PRODUCT`, `TOTAL_COST`, `PAY_METHOD`, `RECEIVE_PHONE`, `RECEIVE_ADDRESS`) VALUES ('00001', '2', 'Nguyen Duc An', '2', '460000', 'cash', '0794763040', 'Gò Vấp, TP.HCM');
+INSERT INTO `ltw`.`orders` (`OrderID`, `USERID`, `NAME`, `TOTAL_PRODUCT`, `TOTAL_COST`, `PAY_METHOD`, `RECEIVE_PHONE`, `RECEIVE_ADDRESS`) VALUES ('00002', '4', 'Le Phuoc Dat', '1', '230000', 'momo', '0459835899', '7/38A Cao Lãnh, quận 8, TP.HCM');
+INSERT INTO `ltw`.`orders` (`OrderID`, `USERID`, `NAME`, `TOTAL_PRODUCT`, `TOTAL_COST`, `PAY_METHOD`, `RECEIVE_PHONE`, `RECEIVE_ADDRESS`) VALUES ('00003', '5', 'Duong Huynh Anh Duc', '1', '240000', 'cash', '0796757342', '102 Nguyễn Văn Nghi, phường 5, quận Gò Vấp, TP.HCM');
+INSERT INTO `ltw`.`orders` (`OrderID`, `USERID`, `NAME`, `TOTAL_PRODUCT`, `TOTAL_COST`, `PAY_METHOD`, `RECEIVE_PHONE`, `RECEIVE_ADDRESS`) VALUES ('00004', '6', 'Tran Thi Thu Thao', '1', '200000', 'cash', '0972334457', '112 Huỳnh Văn Bánh, Phú Nhuận, TP.HCM');
+INSERT INTO `ltw`.`orders` (`OrderID`, `USERID`, `NAME`, `TOTAL_PRODUCT`, `TOTAL_COST`, `PAY_METHOD`, `RECEIVE_PHONE`, `RECEIVE_ADDRESS`) VALUES ('00005', '7', 'Kim Su Quan', '2', '500000', 'bank', '0123215568', '449E Lê Quang Định, Bình Thạnh, TP.HCM');
 
 -- include
 INSERT INTO `ltw`.`include` (`ProductID`,`COLOR`,`SIZE`,`NUMBER`,`OrderID`) VALUES ('DC08097','red','S','2','00001');
@@ -206,17 +206,17 @@ INSERT INTO `ltw`.`include` (`ProductID`,`COLOR`,`SIZE`,`NUMBER`, `OrderID`) VAL
 INSERT INTO `ltw`.`include` (`ProductID`,`COLOR`,`SIZE`,`NUMBER`, `OrderID`) VALUES ('DC09062','orange','XS','3','00005');
 
 -- comment
-INSERT INTO `ltw`.`comments` (`CommentID`, `ProductID`, `CustomerID`, `RATING`, `DATE_TIME`, `IMG`, `CMT`) VALUES ('00001', 'DC08097', '2', '5', '2023-02-01', 'https://js0fpsb45jobj.vcdn.cloud/storage/upload/media/toolbar-200x238px-2-2.jpg', 'Sản phẩm tốt chất lượng, sẽ tiếp tục ủng hộ');
-INSERT INTO `ltw`.`comments` (`CommentID`, `ProductID`, `CustomerID`, `RATING`, `DATE_TIME`, `CMT`) VALUES ('00002', 'DC09071', '4', '4', '2023-03-04', 'Sản phẩm như hình!');
-INSERT INTO `ltw`.`comments` (`CommentID`, `ProductID`, `CustomerID`, `RATING`, `DATE_TIME`, `CMT`) VALUES ('3', 'DC08097', '5', '3', '2023-04-01', 'Giao hàng chậm, còn chất lượng thì tốt');
+INSERT INTO `ltw`.`comments` (`CommentID`, `ProductID`, `USERID`, `RATING`, `DATE_TIME`, `IMG`, `CMT`) VALUES ('00001', 'DC08097', '2', '5', '2023-02-01', 'https://js0fpsb45jobj.vcdn.cloud/storage/upload/media/toolbar-200x238px-2-2.jpg', 'Sản phẩm tốt chất lượng, sẽ tiếp tục ủng hộ');
+INSERT INTO `ltw`.`comments` (`CommentID`, `ProductID`, `USERID`, `RATING`, `DATE_TIME`, `CMT`) VALUES ('00002', 'DC09071', '4', '4', '2023-03-04', 'Sản phẩm như hình!');
+INSERT INTO `ltw`.`comments` (`CommentID`, `ProductID`, `USERID`, `RATING`, `DATE_TIME`, `CMT`) VALUES ('3', 'DC08097', '5', '3', '2023-04-01', 'Giao hàng chậm, còn chất lượng thì tốt');
 
 -- add-to-cart
-INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `CustomerID`,`NUMBER`) VALUES ('DC08097','red','M' ,'4','1');
-INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `CustomerID`,`NUMBER`) VALUES ('DC08097','red','M' ,'1','1');
-INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `CustomerID`,`NUMBER`) VALUES ('DC08097','blue','S' ,'2','2');
-INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `CustomerID`,`NUMBER`) VALUES ('DC09062','orange','XS' ,'2','2');
-INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `CustomerID`,`NUMBER`) VALUES ('DC09063','yellow','XS' ,'3','2');
-INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `CustomerID`,`NUMBER`) VALUES ('DC11071','orange','S' ,'5','1');
+INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `USERID`,`NUMBER`) VALUES ('DC08097','red','M' ,'4','1');
+INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `USERID`,`NUMBER`) VALUES ('DC08097','red','M' ,'1','1');
+INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `USERID`,`NUMBER`) VALUES ('DC08097','blue','S' ,'2','2');
+INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `USERID`,`NUMBER`) VALUES ('DC09062','orange','XS' ,'2','2');
+INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `USERID`,`NUMBER`) VALUES ('DC09063','yellow','XS' ,'3','2');
+INSERT INTO `ltw`.`add_to_cart` (`ProductID`,`COLOR`,`SIZE`, `USERID`,`NUMBER`) VALUES ('DC11071','orange','S' ,'5','1');
 
 -- resource
 INSERT INTO `ltw`.`resource` (`ID`, `NAME`, `CONTENT`) VALUES ('1', 'Rớt nước mắt trước tâm thư của nhân viên gửi sếp giữa tâm dịch', 'Trong thư, cô gái bày tỏ lời biết ơn sâu sắc tới sếp vì sự tử tế và tình yêu thương đã luôn hỗ trợ và đồng hành cùng mình trong suốt chặng đường qua. Đồng thời, công ty cũng là chỗ dựa vững chắc cho mình và các đồng nghiệp tại thời điểm khó khăn chung của nền kinh tế. ');
