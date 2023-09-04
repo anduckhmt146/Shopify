@@ -14,7 +14,7 @@ const getAllUsers = async () => {
 };
 
 const getUserById = async (id: string) => {
-  const query = `SELECT USERID, Phone_Number, USERNAME, PASSWORD, NAME, BIRTHDAY, AVATAR, ROLE FROM USER WHERE USERID = ${id}`;
+  const query = `SELECT USERID, Phone_Number, USERNAME, PASSWORD, NAME, BIRTHDAY, AVATAR, EMAIL, ROLE FROM USER WHERE USERID = ${id}`;
   try {
     const rows = await useQuery(query);
     return JSON.parse(JSON.stringify(rows));
@@ -24,7 +24,7 @@ const getUserById = async (id: string) => {
 };
 
 const findByUserName = async (username: string) => {
-  const query = `SELECT USERID, Phone_Number, USERNAME, PASSWORD, NAME, BIRTHDAY, AVATAR, ROLE FROM USER WHERE USERNAME = ${username}`;
+  const query = `SELECT USERID, Phone_Number, USERNAME, PASSWORD, NAME, BIRTHDAY, AVATAR, EMAIL, ROLE FROM USER WHERE USERNAME = '${username}'`;
   try {
     const rows = await useQuery(query);
     return JSON.parse(JSON.stringify(rows));
@@ -34,12 +34,12 @@ const findByUserName = async (username: string) => {
 };
 
 const createUser = async (createUserDto: CreateUserDto) => {
-  if (!createUserDto.ROLE) createUserDto.ROLE = Role.USER;
-  const query = `INSERT INTO USER (USERNAME, PASSWORD, NAME, Phone_Number, ROLE) VALUES ('${createUserDto.USERNAME}', '${createUserDto.PASSWORD}', '${createUserDto.NAME}', '${createUserDto.Phone_Number}','${createUserDto.ROLE}')`;
+  if (!createUserDto.role) createUserDto.role = Role.CUSTOMER;
+  if (!createUserDto.email) createUserDto.email = '';
+  const query = `INSERT INTO USER (USERNAME, PASSWORD, NAME, Phone_Number, EMAIL, ROLE) VALUES ('${createUserDto.username}', '${createUserDto.password}', '${createUserDto.name}', '${createUserDto.phone}','${createUserDto.email}', '${createUserDto.role}')`;
   try {
     await useQuery(query);
     return {
-      status: 201,
       message: 'User created successfully',
     };
   } catch (err) {

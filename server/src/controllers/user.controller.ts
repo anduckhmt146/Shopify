@@ -1,3 +1,4 @@
+const { StatusCodes } = require('http-status-codes');
 const {
   getAllUsers,
   getUserById,
@@ -11,6 +12,7 @@ const {
 } = require('../utils/errorHandler');
 
 const { hashPassword, comparePassword } = require('../utils/passwordService');
+const { generateToken } = require('../utils/jwtService');
 
 const GetAllUsers = async (req: any, res: any) => {
   const data = await getAllUsers();
@@ -26,32 +28,55 @@ const GetUserById = async (req: any, res: any, next: any) => {
   }
   return res.send(data);
 };
-
-const FindByUserName = async (req: any, res: any, next: any) => {
-  const userName = req.body.username;
-  const data = await findByUserName(userName);
-  if (data.length === 0) {
-    const notFoundError = new NotFoundError('User not found');
-    next(notFoundError);
-    return;
-  }
-  return res.send(data);
-};
-
 const Register = async (req: any, res: any, next: any) => {
   const userName = req.body.username;
-  const userIsExist = await findByUserName(userName);
-  if (userIsExist.length !== 0) {
+  const user = await findByUserName(userName);
+  if (user.length !== 0) {
     const unAuthenticatedError = new UnauthenticatedError('User is exist');
     next(unAuthenticatedError);
     return;
   }
   // hash password
-  req.body.password = hashPassword(req.body.password);
-  const data = await createUser(req.body);
-  return res.send(data);
+  req.body.password = await hashPassword(req.body.password);
+  try {
+    await createUser(req.body);
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+      message: error,
+    });
+  }
+  return res.status(StatusCodes.CREATED).send({
+    message: 'User created successfully',
+  });
 };
 
-const Login = async (req: any, res: any) => {};
+const Login = async (req: any, res: any, next: any) => {
+  const userName = req.body.username;
+  // check user exists
+  const user = await findByUserName(userName);
+  if (user.length === 0) {
+    const notFoundError = new NotFoundError('User not found');
+    next(notFoundError);
+    return;
+  }
+  // compare password
+  const isPasswordCorrect = await comparePassword(
+    req.body.password,
+    user[0].PASSWORD
+  );
+  if (!isPasswordCorrect) {
+    const unAuthenticatedError = new UnauthenticatedError(
+      'Password is not correct!'
+    );
+    next(unAuthenticatedError);
+    return;
+  }
+  // generate token
+  const token = await generateToken(user);
+  return res.status(StatusCodes.OK).send({
+    message: 'Login successfully!',
+    data: { token },
+  });
+};
 
-module.exports = { GetAllUsers, GetUserById, FindByUserName, Register, Login };
+module.exports = { GetAllUsers, GetUserById, Register, Login };

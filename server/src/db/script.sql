@@ -46,9 +46,10 @@ CREATE TABLE PRODUCT(
 
 CREATE TABLE USER(
 	USERID INT AUTO_INCREMENT PRIMARY KEY,
-    Phone_Number VARCHAR(10),
+    Phone_Number VARCHAR(10) UNIQUE,
     USERNAME VARCHAR(20) UNIQUE,
-    PASSWORD VARCHAR(20),
+    EMAIL VARCHAR(20),
+    PASSWORD VARCHAR(100),
     NAME VARCHAR(20),
     BIRTHDAY VARCHAR(10),
     AVATAR VARCHAR(255),
@@ -142,7 +143,7 @@ INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTH
 
 INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0794763040', 'ducduong123', '123456', 'Dương Huỳnh Anh Đức', '2002-02-01', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'admin');
 
-INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0794763040', 'thuthao0611', '123456', 'Trần Thị Thu Thảo', '2002-02-01', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'admin');
+INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0794763041', 'thuthao0611', '123456', 'Trần Thị Thu Thảo', '2002-02-01', 'https://thegioidienanh.vn/stores/news_dataimages/nguyenthithanhthuy/102019/15/11/0724_Ynh_1_7.jpg', 'admin');
 
 INSERT INTO `ltw`.`USER` (`Phone_Number`, `USERNAME`, `PASSWORD`, `NAME`, `BIRTHDAY`, `AVATAR`, `ROLE`) VALUES ('0903228745', 'lac123', '123456', 'Ngụy Anh Lạc', '2001-03-05', 'https://th.bing.com/th/id/R.0a8dfabc06847d163f5d82b41c8a5553?rik=h1peRQORlGvAwQ&pid=ImgRaw&r=0', 'USER');
 
