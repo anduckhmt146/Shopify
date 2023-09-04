@@ -4,11 +4,9 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const generateToken = (createUserDto: CreateUserDto) => {
-  const token = jwt.sign({
-    username: createUserDto.USERNAME,
-    password: createUserDto.PASSWORD,
-    phoneNumber: createUserDto.Phone_Number,
-  });
+  const retData = { ...createUserDto };
+  delete retData.password;
+  const token = jwt.sign(retData, process.env.JWT_SECRET);
   return token;
 };
 

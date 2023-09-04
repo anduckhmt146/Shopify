@@ -1,12 +1,13 @@
 export enum Role {
   ADMIN = 'admin',
-  USER = 'user',
+  CUSTOMER = 'customer',
 }
 
 export interface CreateUserDto {
-  USERNAME: string;
-  PASSWORD: string;
-  NAME: string;
-  Phone_Number: string;
-  ROLE: Role.ADMIN | Role.USER;
+  username: string;
+  password?: string;
+  name: string;
+  email?: string;
+  phone: string;
+  role: Role;
 }
