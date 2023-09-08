@@ -1,3 +1,5 @@
+import { RequestListener } from 'http';
+
 const { StatusCodes } = require('http-status-codes');
 const {
   getAllUsers,
@@ -13,6 +15,7 @@ const {
 
 const { hashPassword, comparePassword } = require('../utils/passwordService');
 const { generateToken } = require('../utils/jwtService');
+const { sendEmail } = require('../utils/mailService');
 
 const GetAllUsers = async (req: any, res: any) => {
   const data = await getAllUsers();
@@ -79,4 +82,15 @@ const Login = async (req: any, res: any, next: any) => {
   });
 };
 
-module.exports = { GetAllUsers, GetUserById, Register, Login };
+const SendEmail = async (req: any, res: any) => {
+  try {
+    await sendEmail(req.body.email);
+    return res.status(StatusCodes.OK).send({
+      message: 'Send email successfully!',
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { GetAllUsers, GetUserById, Register, Login, SendEmail };
