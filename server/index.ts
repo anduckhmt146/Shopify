@@ -18,8 +18,8 @@ app.use(express.json());
 
 // routes
 app.use('/api/v0/users', userRoutes);
-app.use('/api/v0/cart', cartRoutes);
 app.use('/api/v0/products', productRoutes);
+app.use('/api/v0/cart', cartRoutes);
 app.use('/api/v0/orders', orderRoutes);
 
 // error-handling

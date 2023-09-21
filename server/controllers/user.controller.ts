@@ -1,5 +1,3 @@
-import { RequestListener } from 'http';
-
 const { StatusCodes } = require('http-status-codes');
 const {
   getAllUsers,
