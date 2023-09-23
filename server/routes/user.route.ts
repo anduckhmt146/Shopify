@@ -8,9 +8,9 @@ const {
   SendEmail,
 } = require('../controllers/user.controller');
 
-router.get('/', GetAllUsers);
-router.post('/register', Register);
-router.post('/login', Login);
-router.post('/send-email', SendEmail);
-router.get('/:id', GetUserById);
+router.route('/').get(GetAllUsers);
+router.route('/register').post(Register);
+router.route('/login').post(Login);
+router.route('/send-email').post(SendEmail);
+router.route('/:id').get(GetUserById);
 module.exports = router;
