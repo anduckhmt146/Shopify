@@ -3,14 +3,14 @@ const router = express.Router();
 
 const {
   AddToCart,
-  GetCartById,
+  GetCartByCustomerID,
   DeleteCart,
   UpdateCart,
   CalculateCartById,
 } = require('../controllers/order.controller');
 
 router.route('/').post(AddToCart).delete(DeleteCart).put(UpdateCart);
-router.route('/:id').get(GetCartById);
+router.route('/customer/:id').get(GetCartByCustomerID);
 router.route('/calculate/:id').get(CalculateCartById);
 
 module.exports = router;
