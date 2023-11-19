@@ -1,26 +1,59 @@
 const { StatusCodes } = require('http-status-codes');
 const {
   addToCart,
-  getCartById,
-  deleteCart,
+  getCartByUserID,
+  deleteInCart,
   updateCart,
-  calculateCartById,
+  calculateCartByUserId,
 } = require('../models/cart.model');
 
-const AddToCart = async (req: any, res: any) => {};
+const AddToCart = async (req: any, res: any) => {
+  try {
+    await addToCart(req.body);
+    return res.status(StatusCodes.CREATED).send({
+      message: 'Add to cart successfully!',
+    });
+  } catch (error) {
+    throw error;
+  }
+};
 
-const GetCartById = async (req: any, res: any) => {};
+const GetCartByUserID = async (req: any, res: any) => {
+  const data = await getCartByUserID(req.params.id);
+  return res.status(StatusCodes.OK).send(data);
+};
 
-const DeleteCart = async (req: any, res: any) => {};
+const DeleteInCart = async (req: any, res: any) => {
+  try {
+    await deleteInCart(req.body);
+    return res.status(StatusCodes.OK).send({
+      message: 'Delete cart successfully!',
+    });
+  } catch (error) {
+    throw error;
+  }
+};
 
-const UpdateCart = async (req: any, res: any) => {};
+const UpdateCart = async (req: any, res: any) => {
+  try {
+    await updateCart(req.body);
+    return res.status(StatusCodes.OK).send({
+      message: 'Update cart successfully!',
+    });
+  } catch (error) {
+    throw error;
+  }
+};
 
-const CalculateCartById = async (req: any, res: any) => {};
+const CalculateCartByUserId = async (req: any, res: any) => {
+  const data = await calculateCartByUserId(req.params.id);
+  return res.status(StatusCodes.OK).send(data);
+};
 
 module.exports = {
   AddToCart,
-  GetCartById,
-  DeleteCart,
+  GetCartByUserID,
+  DeleteInCart,
   UpdateCart,
-  CalculateCartById,
+  CalculateCartByUserId,
 };

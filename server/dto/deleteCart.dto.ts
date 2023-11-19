@@ -1,7 +1,6 @@
-export interface AddToCartDto {
+export interface DeleteCartDto {
   userID: string;
   productID: string;
   color: string;
   size: string;
-  quantity: number;
 }
