@@ -29,12 +29,12 @@ const GetOrderById = async (req: any, res: any, next: any) => {
 };
 
 const GetOrderByCustomer = async (req: any, res: any) => {
-  const data = await getOrderByCustomer(req.body.customerID);
+  const data = await getOrderByCustomer(req.params.id);
   return res.status(StatusCodes.OK).send(data);
 };
 
 const ConfirmOrder = async (req: any, res: any) => {
-  const data = await confirmOrder(req.body.id);
+  const data = await confirmOrder(req.body.OrderID);
   return res.status(StatusCodes.OK).send(data);
 };
 

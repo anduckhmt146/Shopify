@@ -1,8 +1,8 @@
 export interface CreateOrderDto {
-  customerID: string;
+  userID: string;
   name: string;
   paymentMethod: string;
-  note: string;
+  note?: string;
   phone: string;
   address: string;
   totalCost: number;

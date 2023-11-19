@@ -1,10 +1,10 @@
 const { StatusCodes } = require('http-status-codes');
 const {
   addToCart,
-  getCartByCustomerID,
-  deleteCart,
+  getCartByUserID,
+  deleteInCart,
   updateCart,
-  calculateCartById,
+  calculateCartByUserId,
 } = require('../models/cart.model');
 
 const AddToCart = async (req: any, res: any) => {
@@ -18,14 +18,14 @@ const AddToCart = async (req: any, res: any) => {
   }
 };
 
-const GetCartByCustomerID = async (req: any, res: any) => {
-  const data = await getCartByCustomerID(req.params.id);
+const GetCartByUserID = async (req: any, res: any) => {
+  const data = await getCartByUserID(req.params.id);
   return res.status(StatusCodes.OK).send(data);
 };
 
-const DeleteCart = async (req: any, res: any) => {
+const DeleteInCart = async (req: any, res: any) => {
   try {
-    await deleteCart(req.body);
+    await deleteInCart(req.body);
     return res.status(StatusCodes.OK).send({
       message: 'Delete cart successfully!',
     });
@@ -45,15 +45,15 @@ const UpdateCart = async (req: any, res: any) => {
   }
 };
 
-const CalculateCartById = async (req: any, res: any) => {
-  const data = await calculateCartById(req.params.id);
+const CalculateCartByUserId = async (req: any, res: any) => {
+  const data = await calculateCartByUserId(req.params.id);
   return res.status(StatusCodes.OK).send(data);
 };
 
 module.exports = {
   AddToCart,
-  GetCartByCustomerID,
-  DeleteCart,
+  GetCartByUserID,
+  DeleteInCart,
   UpdateCart,
-  CalculateCartById,
+  CalculateCartByUserId,
 };

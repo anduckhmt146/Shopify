@@ -66,13 +66,13 @@ class Product
                     $query = $query . " AND";
                 }
                 if ($price == '0') {
-                    $query = $query . " PRICE<300000";
+                    $query = $query . " PRICE < 300000";
                 }
                 if ($price == '1') {
-                    $query = $query . " PRICE>=300000 AND PRICE <= 500000";
+                    $query = $query . " PRICE >= 300000 AND PRICE <= 500000";
                 }
                 if ($price == '2') {
-                    $query = $query . " PRICE>500000";
+                    $query = $query . " PRICE > 500000";
                 }
                 $first = False;
             }

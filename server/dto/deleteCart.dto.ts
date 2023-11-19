@@ -1,5 +1,5 @@
 export interface DeleteCartDto {
-  customerID: string;
+  userID: string;
   productID: string;
   color: string;
   size: string;

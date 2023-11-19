@@ -1,5 +1,5 @@
 export interface UpdateCartDto {
-  customerID: string;
+  userID: string;
   productID: string;
   color: string;
   size: string;
